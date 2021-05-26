@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm/Dockerfile
+    container_name: quanti-magento_php-fpm
+    networks:
+      - internal
+    volumes:
+      - ./application:/application
+      - ./docker/php-fpm/php.ini:/usr/local/docker/php/php.ini
+
+  app-server:
+    build:
+      context: .
+      dockerfile: ./docker/app-server/Dockerfile
+    container_name: quanti-magento_app-server
+    depends_on:
+      - php-fpm
+    networks:
+      - external
+      - internal
+    ports:
+      - 80:80
+    volumes:
+      - ./application:/application
+      - ./application/nginx.conf.sample:/application/nginx.conf
+      - ./docker/app-server/default.conf:/docker/nginx/conf.d/default.conf
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    container_name: quanti-magento_mysql
+    environment:
+      MYSQL_DATABASE: "magento"
+      MYSQL_PASSWORD: "magento"
+      MYSQL_ROOT_PASSWORD: "magento"
+      MYSQL_USER: "magento"
+    networks:
+      - internal
+    platform: linux/amd64
+    volumes:
+      - mysql:/var/lib/mysql
+
+  elasticsearch:
+    build:
+      context: .
+      dockerfile: ./docker/elasticsearch/Dockerfile
+    container_name: quanti-magento_elasticsearch
+    environment:
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    networks:
+      - internal
+
+networks:
+  internal:
+  external:
+
+volumes:
+  mysql:
+
