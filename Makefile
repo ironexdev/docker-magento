@@ -1,6 +1,8 @@
-install:
+new-project:
 	@composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento
-	@docker-compose exec -T php-fpm /application/bin/magento setup:install \
+
+install:
+	@docker-compose exec -T php-fpm /magento/bin/magento setup:install \
 --base-url=http://magento.local \
 --db-host=mysql \
 --db-name=magento \

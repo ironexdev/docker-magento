@@ -9,7 +9,7 @@ services:
     networks:
       - internal
     volumes:
-      - ./application:/application
+      - ./magento:/magento
       - ./docker/php-fpm/php.ini:/usr/local/docker/php/php.ini
 
   app-server:
@@ -25,8 +25,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./application:/application
-      - ./application/nginx.conf.sample:/application/nginx.conf
+      - ./magento:/magento
       - ./docker/app-server/default.conf:/docker/nginx/conf.d/default.conf
 
   mysql:
