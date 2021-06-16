@@ -1,5 +1,7 @@
 FROM php:7.4.19-fpm-alpine
 
+COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
+
 # php gd dependencies
 RUN apk add zlib-dev
 RUN apk add jpeg-dev

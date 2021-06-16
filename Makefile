@@ -1,5 +1,5 @@
 new-project:
-	@composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento
+	@composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition magento
 
 install:
 	@docker-compose exec -T php-fpm /magento/bin/magento setup:install \
