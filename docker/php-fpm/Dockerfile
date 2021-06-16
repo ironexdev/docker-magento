@@ -28,4 +28,9 @@ RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install sockets
 
+# xdebug
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-3.0.4 \
+    && docker-php-ext-enable xdebug
+
 EXPOSE 9000

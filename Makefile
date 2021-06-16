@@ -17,5 +17,18 @@ install:
 --currency=USD \
 --timezone=America/Chicago \
 --use-rewrites=1 \
---elasticsearch-host=elasticsearch
-
+--elasticsearch-host=elasticsearch \
+--session-save=redis \
+--session-save-redis-host=redis \
+--session-save-redis-db=0 --session-save-redis-password="" \
+--cache-backend=redis \
+--cache-backend-redis-server=redis \
+--cache-backend-redis-db=1 \
+--page-cache=redis \
+--page-cache-redis-server=redis \
+--page-cache-redis-db=2 \
+--amqp-host="rabbitmq" \
+--amqp-port="5672" \
+--amqp-user="guest" \
+--amqp-password="guest" \
+--amqp-virtualhost="/"

@@ -5,18 +5,18 @@ services:
     build:
       context: .
       dockerfile: ./docker/php-fpm/Dockerfile
-    container_name: quanti-magento_php-fpm
+    container_name: docker-magento_php-fpm
     networks:
       - internal
     volumes:
       - ./magento:/magento
-      - ./docker/php-fpm/php.ini:/usr/local/docker/php/php.ini
+      - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
 
   app-server:
     build:
       context: .
       dockerfile: ./docker/app-server/Dockerfile
-    container_name: quanti-magento_app-server
+    container_name: docker-magento_app-server
     depends_on:
       - php-fpm
     networks:
@@ -26,13 +26,13 @@ services:
       - 80:80
     volumes:
       - ./magento:/magento
-      - ./docker/app-server/default.conf:/docker/nginx/conf.d/default.conf
+      - ./docker/app-server/default.conf:/etc/nginx/conf.d/default.conf
 
   mysql:
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
-    container_name: quanti-magento_mysql
+    container_name: docker-magento_mysql
     environment:
       MYSQL_DATABASE: "magento"
       MYSQL_PASSWORD: "magento"
@@ -48,10 +48,43 @@ services:
     build:
       context: .
       dockerfile: ./docker/elasticsearch/Dockerfile
-    container_name: quanti-magento_elasticsearch
+    container_name: docker-magento_elasticsearch
     environment:
       discovery.type: "single-node"
       ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    networks:
+      - internal
+
+  kibana:
+    build:
+      context: .
+      dockerfile: ./docker/kibana/Dockerfile
+    container_name: docker-magento_kibana
+    networks:
+      - internal
+    platform: linux/amd64
+
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: ./docker/rabbitmq/Dockerfile
+    container_name: docker-magento_rabbitmq
+    networks:
+      - internal
+
+  redis:
+    build:
+      context: .
+      dockerfile: ./docker/redis/Dockerfile
+    container_name: docker-magento_redis
+    networks:
+      - internal
+
+  redis-admin:
+    container_name: docker-magento_redis-admin
+    environment:
+      REDIS_1_HOST: "redis"
+    image: erikdubbelboer/phpredisadmin:v1.13.2
     networks:
       - internal
 
@@ -61,4 +94,3 @@ networks:
 
 volumes:
   mysql:
-
