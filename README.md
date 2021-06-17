@@ -25,7 +25,7 @@ __4) Install Magento__
 
 __5) Setup Xdebug in IDE__
 
-- PhpStorm should offer you automatic setup and correct settings should be similar to this:
+- PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a broweser) and correct settings should be similar to this:
 
 Preferences - PHP - Debug
 
