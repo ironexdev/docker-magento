@@ -13,7 +13,7 @@ __2) Store composer credentials to repo.magento.com in project repository__
 
 __3) Start Docker__
 
-```docker-compose up -d```
+- ```docker-compose up -d```
 
 __4) Create new or add existing Magento project__
 
@@ -26,7 +26,7 @@ __4) Create new or add existing Magento project__
 
 __5) Install Magento__
 
-```make install```
+- ```make install```
 
 __6) Setup Xdebug in IDE__
 
