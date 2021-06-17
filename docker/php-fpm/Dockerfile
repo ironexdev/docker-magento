@@ -1,7 +1,5 @@
 FROM php:7.4.19-fpm-alpine
 
-COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
-
 # php gd dependencies
 RUN apk add zlib-dev
 RUN apk add jpeg-dev
@@ -34,5 +32,7 @@ RUN docker-php-ext-install sockets
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-3.0.4 \
     && docker-php-ext-enable xdebug
+
+COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
 
 EXPOSE 9000

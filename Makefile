@@ -1,14 +1,16 @@
 new-project:
-ifdef PUBLIC_KEY
-ifdef PRIVATE_KEY
-	@echo '{ "http-basic": { "repo.magento.com": { "username": "$(PUBLIC_KEY)", "password": "$(PRIVATE_KEY)" } } }' > auth.json
-	@composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition magento
-else
-	@echo PRIVATE_KEY is required
-endif
-else
-	@echo PUBLIC_KEY is required
-endif
+	@composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.2-p1 magento
+
+auth:
+	ifdef PUBLIC_KEY
+	ifdef PRIVATE_KEY
+		@echo '{ "http-basic": { "repo.magento.com": { "username": "$(PUBLIC_KEY)", "password": "$(PRIVATE_KEY)" } } }' > auth.json
+	else
+		@echo PRIVATE_KEY is required
+	endif
+	else
+		@echo PUBLIC_KEY is required
+	endif
 
 install:
 	@docker-compose exec -T php-fpm /magento/bin/magento setup:install \
