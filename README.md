@@ -2,9 +2,13 @@
 
 ## Setup
 
-__1) Add 127.0.0.1 magento.local to etc/hosts file__
+__1) Add 127.0.0.1 magento.local to etc/hosts
 
-__2) Create new or add existing Magento project__
+__2) Store composer credentials to repo.magento.com in project repository
+	- ``` make auth ```
+		- Creates auth.json
+
+__3) Create new or add existing Magento project__
 
 - Create new project
 	- ```make new-project PUBLIC_KEY={{ public key }} PRIVATE_KEY={{ private key }}```
@@ -15,15 +19,15 @@ __2) Create new or add existing Magento project__
 - Add existing project
 	- Create new "magento" folder inside project root and paste an existing Magento project to it  
     
-__3) Start Docker__
+__4) Start Docker__
 
 ```docker-compose up -d```
 
-__4) Install Magento__
+__5) Install Magento__
 
 ```make install```
 
-__5) Setup Xdebug in IDE__
+__6) Setup Xdebug in IDE__
 
 - PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a browser) and correct settings should be similar to this:
 
