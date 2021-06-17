@@ -19,6 +19,7 @@ __4) Create new or add existing Magento project__
 
 - Create new project
 	- ```make new-project```
+		- This step requires you to have php and composer installed on your host machine
 
 - Add existing project
 	- Create new "magento" folder inside project root and paste an existing Magento project to it  
