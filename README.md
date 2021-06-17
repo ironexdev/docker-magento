@@ -27,6 +27,7 @@ __5) Setup Xdebug in IDE__
 
 - PhpStorm should offer you automatic setup, which should look something like this
 
-![PhpStorm setup](https://i.ibb.co/GVqfVs5/phpstorm.jpg "Logo Title Text 1")
+![Preferences - PHP - Servers](https://i.ibb.co/GVqfVs5/phpstorm.jpg "Preferences - PHP - Servers")
 
+![Preferences - PHP - Debug](https://i.ibb.co/BZJ4hjz/phpstorm-2.jpg "Preferences - PHP - Debug")
 
