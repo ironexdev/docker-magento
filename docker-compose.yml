@@ -90,15 +90,6 @@ services:
     networks:
       - internal
 
-  composer:
-    build:
-      context: .
-      dockerfile: ./docker/composer/Dockerfile
-    container_name: docker-magento_composer
-    volumes:
-      - ./auth.json:/auth.json
-      - ./magento:/magento
-
 networks:
   internal:
   external:
