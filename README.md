@@ -25,9 +25,14 @@ __4) Install Magento__
 
 __5) Setup Xdebug in IDE__
 
-- PhpStorm should offer you automatic setup, which should look something like this
+- PhpStorm should offer you automatic setup. Correct settings should be similar to this.
+
+Preferences - PHP - Debug
+
+![Preferences - PHP - Debug](https://i.ibb.co/BZJ4hjz/phpstorm-2.jpg "Preferences - PHP - Debug")
+
+Preferences - PHP - Servers
 
 ![Preferences - PHP - Servers](https://i.ibb.co/GVqfVs5/phpstorm.jpg "Preferences - PHP - Servers")
 
-![Preferences - PHP - Debug](https://i.ibb.co/BZJ4hjz/phpstorm-2.jpg "Preferences - PHP - Debug")
 
