@@ -5,8 +5,8 @@
 __1) Add 127.0.0.1 magento.local to etc/hosts__
 
 __2) Store composer credentials to repo.magento.com in project repository__
-	- ``` make auth ```
-		- Creates auth.json
+- ``` make auth ```
+	- Creates auth.json
 
 __3) Create new or add existing Magento project__
 
