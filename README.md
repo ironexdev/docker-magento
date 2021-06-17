@@ -9,6 +9,8 @@ __2) Create new or add existing Magento project__
 - Create new project
 	- ```make new-project PUBLIC_KEY={{ public key }} PRIVATE_KEY={{ private key }}```
 		- Keys can be found in https://marketplace.magento.com/customer/accessKeys/
+		- This will generate new gitignored auth.json file with credentials to repo.magento.com
+			- For auth.json file to work, the composer.json (already added) is needed in project root
 
 - Add existing project
 	- Create new "magento" folder inside project root and paste an existing Magento project to it  
