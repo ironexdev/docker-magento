@@ -1,5 +1,6 @@
 new-project:
 	@docker-compose run composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.2-p1 /magento
+	@docker-compose rm --force composer
 
 auth:
 	ifdef PUBLIC_KEY
