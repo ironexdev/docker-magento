@@ -11,17 +11,17 @@ __2) Store composer credentials to repo.magento.com in project repository__
 	- This will generate new gitignored auth.json file with credentials to repo.magento.com
 		- For auth.json file to work, the composer.json (already added) is needed in project root
 
-__3) Create new or add existing Magento project__
+__3) Start Docker__
+
+```docker-compose up -d```
+
+__4) Create new or add existing Magento project__
 
 - Create new project
 	- ```make new-project```
 
 - Add existing project
 	- Create new "magento" folder inside project root and paste an existing Magento project to it  
-    
-__4) Start Docker__
-
-```docker-compose up -d```
 
 __5) Install Magento__
 

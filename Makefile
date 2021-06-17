@@ -1,5 +1,5 @@
 new-project:
-	@composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.2-p1 magento
+	@docker-compose run composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.2-p1 /magento
 
 auth:
 	ifdef PUBLIC_KEY
@@ -43,3 +43,6 @@ install:
 --amqp-user="guest" \
 --amqp-password="guest" \
 --amqp-virtualhost="/"
+
+composer:
+	@docker run --rm --workdir /app --platform linux/amd64 --volume $$PWD/app:/app composer:2.1.3 $(x)

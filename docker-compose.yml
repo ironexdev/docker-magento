@@ -81,12 +81,23 @@ services:
       - internal
 
   redis-admin:
+    build:
+      context: .
+      dockerfile: ./docker/redis-admin/Dockerfile
     container_name: docker-magento_redis-admin
     environment:
       REDIS_1_HOST: "redis"
-    image: erikdubbelboer/phpredisadmin:v1.13.2
     networks:
       - internal
+
+  composer:
+    build:
+      context: .
+      dockerfile: ./docker/composer/Dockerfile
+    container_name: docker-magento_composer
+    volumes:
+      - ./auth.json:/auth.json
+      - ./magento:/magento
 
 networks:
   internal:
