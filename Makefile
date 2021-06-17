@@ -3,15 +3,15 @@ new-project:
 	@docker-compose rm --force composer
 
 auth:
-	ifdef PUBLIC_KEY
-	ifdef PRIVATE_KEY
-		@echo '{ "http-basic": { "repo.magento.com": { "username": "$(PUBLIC_KEY)", "password": "$(PRIVATE_KEY)" } } }' > auth.json
-	else
-		@echo PRIVATE_KEY is required
-	endif
-	else
-		@echo PUBLIC_KEY is required
-	endif
+ifdef PUBLIC_KEY
+ifdef PRIVATE_KEY
+	@echo '{ "http-basic": { "repo.magento.com": { "username": "$(PUBLIC_KEY)", "password": "$(PRIVATE_KEY)" } } }' > auth.json
+else
+	@echo PRIVATE_KEY is required
+endif
+else
+	@echo PUBLIC_KEY is required
+endif
 
 install:
 	@docker-compose exec -T php-fpm /magento/bin/magento setup:install \
