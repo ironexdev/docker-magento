@@ -9,7 +9,7 @@ services:
     networks:
       - internal
     volumes:
-      - ./magento:/magento
+      - ./magento:/home/psyduck/magento
       - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
 
   app-server:
@@ -25,7 +25,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./magento:/magento
+      - ./magento:/home/psyduck/magento
       - ./docker/app-server/default.conf:/etc/nginx/conf.d/default.conf
 
   mysql:
