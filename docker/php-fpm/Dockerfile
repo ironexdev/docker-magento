@@ -35,9 +35,4 @@ RUN apk add --no-cache $PHPIZE_DEPS \
 
 COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
 
-RUN addgroup -S psyduck && adduser -S psyduck -G psyduck
-
-USER psyduck
-WORKDIR /home/psyduck
-
 EXPOSE 9000
