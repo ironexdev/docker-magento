@@ -15,7 +15,13 @@
 
 ## Setup
 
-__1) Add 127.0.0.1 magento.local to etc/hosts__
+__1) Add following to etc/hosts__
+- 127.0.0.1	magento.local
+- 127.0.0.1	kibana.magento.local
+- 127.0.0.1	redis.magento.local
+- 127.0.0.1	rabbitmq.magento.local
+- 127.0.0.1	adminer.magento.local
+
 
 __2) Store composer credentials to repo.magento.com in project repository__
 - ``` sh bin/auth <public key> <private key>```
