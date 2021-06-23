@@ -1,11 +1,24 @@
-# Docker Magento
+# Docker Magento 
+
+```Rootless containers```,
+```Docker```,
+```Magento```,
+```Nginx```,
+```MySQL```,
+```PHP-FPM```,
+```Adminer```,
+```Redis```,
+```Redis Admin```,
+```RabbitMQ```,
+```Elastic Search```,
+```Kibana```
 
 ## Setup
 
 __1) Add 127.0.0.1 magento.local to etc/hosts__
 
 __2) Store composer credentials to repo.magento.com in project repository__
-- ``` make auth PUBLIC_KEY={{ public key }} PRIVATE_KEY={{ private key }}```
+- ``` sh bin/auth <public key> <private key>```
 	- Creates auth.json
 	- Keys can be found in https://marketplace.magento.com/customer/accessKeys/
 	- This will generate new gitignored auth.json file with credentials to repo.magento.com
@@ -13,20 +26,21 @@ __2) Store composer credentials to repo.magento.com in project repository__
 
 __3) Start Docker__
 
-- ```docker-compose up -d```
+- ```sh bin/start.sh```
+	- Accepts additional arguments (--build <container>)
 
 __4) Create new or add existing Magento project__
 
 - Create new project
-	- ```make new-project```
-		- This step requires you to have php and composer installed on your host machine
+	- ```sh bin/new-project.sh```
+		- This step requires you to have php 7 and composer installed on your host machine
 
 - Add existing project
-	- Create new "magento" folder inside project root and paste an existing Magento project to it  
+	- Paste your existing Magento project to magento folder  
 
 __5) Install Magento__
 
-- ```make install```
+- ```sh bin/install.sh```
 
 __6) Setup Xdebug in IDE__
 

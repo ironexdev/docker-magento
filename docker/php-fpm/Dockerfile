@@ -35,4 +35,13 @@ RUN apk add --no-cache $PHPIZE_DEPS \
 
 COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
 
+ARG GROUP_ID
+ARG USER_ID
+
+RUN addgroup -g $GROUP_ID -S lopata
+
+RUN adduser -S -G lopata -u $USER_ID -s /bin/ash lopata
+
+USER lopata
+
 EXPOSE 9000

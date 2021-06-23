@@ -1,19 +1,4 @@
-new-project:
-	@composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.2-p1 magento
-
-auth:
-ifdef PUBLIC_KEY
-ifdef PRIVATE_KEY
-	@echo '{ "http-basic": { "repo.magento.com": { "username": "$(PUBLIC_KEY)", "password": "$(PRIVATE_KEY)" } } }' > auth.json
-else
-	@echo PRIVATE_KEY is required
-endif
-else
-	@echo PUBLIC_KEY is required
-endif
-
-install:
-	@docker-compose exec -T php-fpm /magento/bin/magento setup:install \
+docker-compose exec -T php-fpm /magento/bin/magento setup:install \
 --base-url=http://magento.local \
 --db-host=mysql \
 --db-name=magento \
@@ -43,6 +28,3 @@ install:
 --amqp-user="guest" \
 --amqp-password="guest" \
 --amqp-virtualhost="/"
-
-composer:
-	@docker run --rm --workdir /app --platform linux/amd64 --volume $$PWD/app:/app composer:2.1.3 $(x)
