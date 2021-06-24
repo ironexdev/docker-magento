@@ -5,7 +5,7 @@
 ```Magento```,
 ```Nginx```,
 ```MySQL```,
-```PHP FPM```,
+```PHP-FPM```,
 ```Adminer```,
 ```Redis```,
 ```Redis Admin```,
