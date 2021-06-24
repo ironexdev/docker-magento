@@ -1,3 +1,5 @@
+#!/bin/sh
+
 docker-compose exec -T php-fpm /magento/bin/magento setup:install \
 --base-url=http://magento.local \
 --db-host=mysql \

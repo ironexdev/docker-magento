@@ -28,12 +28,15 @@ RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install sockets
 
-# xdebug
+# Xdebug
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-3.0.4 \
     && docker-php-ext-enable xdebug
 
 COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
+
+# Composer
+RUN apk add composer
 
 ARG GROUP_ID
 ARG USER_ID

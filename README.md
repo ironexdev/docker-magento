@@ -30,16 +30,8 @@ __2) Start Docker__
 __3) Create new or add existing Magento project__
 
 - Create new project
-	- Store composer credentials to repo.magento.com in project repository
-		- ``` sh bin/auth <public key> <private key>```
-		- Creates auth.json
+	- ```sh bin/new-project.sh```
 		- Keys can be found in https://marketplace.magento.com/customer/accessKeys/
-		- This will generate new gitignored auth.json file with credentials to repo.magento.com
-			- For auth.json file to work, the composer.json (already added) is needed in project root
-
-	- Generate project files
-		- ```sh bin/new-project.sh```
-			- This step requires you to have php 7 and composer installed on your host machine
 
 - Add existing project
 	- Paste your existing Magento project to magento folder  
