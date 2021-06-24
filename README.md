@@ -5,7 +5,7 @@
 ```Magento```,
 ```Nginx```,
 ```MySQL```,
-```PHP-FPM```,
+```PHP FPM```,
 ```Adminer```,
 ```Redis```,
 ```Redis Admin```,
@@ -22,33 +22,33 @@ __1) Add following to etc/hosts__
 - 127.0.0.1	rabbitmq.magento.local
 - 127.0.0.1	adminer.magento.local
 
-
-__2) Store composer credentials to repo.magento.com in project repository__
-- ``` sh bin/auth <public key> <private key>```
-	- Creates auth.json
-	- Keys can be found in https://marketplace.magento.com/customer/accessKeys/
-	- This will generate new gitignored auth.json file with credentials to repo.magento.com
-		- For auth.json file to work, the composer.json (already added) is needed in project root
-
-__3) Start Docker__
+__2) Start Docker__
 
 - ```sh bin/start.sh```
 	- Accepts additional arguments (--build <container>)
 
-__4) Create new or add existing Magento project__
+__3) Create new or add existing Magento project__
 
 - Create new project
-	- ```sh bin/new-project.sh```
-		- This step requires you to have php 7 and composer installed on your host machine
+	- Store composer credentials to repo.magento.com in project repository
+		- ``` sh bin/auth <public key> <private key>```
+		- Creates auth.json
+		- Keys can be found in https://marketplace.magento.com/customer/accessKeys/
+		- This will generate new gitignored auth.json file with credentials to repo.magento.com
+			- For auth.json file to work, the composer.json (already added) is needed in project root
+
+	- Generate project files
+		- ```sh bin/new-project.sh```
+			- This step requires you to have php 7 and composer installed on your host machine
 
 - Add existing project
 	- Paste your existing Magento project to magento folder  
 
-__5) Install Magento__
+__4) Install Magento__
 
 - ```sh bin/install.sh```
 
-__6) Setup Xdebug in IDE__
+__5) Setup Xdebug in IDE__
 
 - PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a browser) and correct settings should be similar to this:
 
