@@ -1,8 +1,8 @@
-# Docker Magento 
+# Docker Magento 2
 
 ```Rootless containers```,
 ```Docker```,
-```Magento```,
+```Magento 2```,
 ```Nginx```,
 ```MySQL```,
 ```PHP-FPM```,
@@ -13,36 +13,68 @@
 ```Elastic Search```,
 ```Kibana```
 
+## Currently supported versions of Magento
+
+- 2.4.x
+
 ## Setup
 
-__1) Add following to etc/hosts__
+__Add following to etc/hosts__
 - 127.0.0.1	magento.local
 - 127.0.0.1	kibana.magento.local
 - 127.0.0.1	redis.magento.local
 - 127.0.0.1	rabbitmq.magento.local
 - 127.0.0.1	adminer.magento.local
 
-__2) Start Docker__
+__A) Create brand new Magento project__
 
-- ```sh bin/start.sh```
-	- Accepts additional arguments (--build <container>)
+1) Run ```sh bin/new-project.sh <version>```
+	- Requires Magento version as an argument
+	- Make sure "magento" folder exists and is owned by current user before you bind it to the container by running the script above, otherwise it will be created by Docker and owned by root.
+	- Keys can be found in https://marketplace.magento.com/customer/accessKeys/ and you can opt-in to store your keys (login and password) to /home/docker/.composer/auth.json, which is bind mounted to docker/php-fpm/auth.json
+	- Magento default settings - these can be edited in bin/new-project.sh
+		- base-url=http://magento.local
+		- db-host=mysql
+		- db-name=magento
+		- db-user=magento
+		- db-password=magento
+		- admin-firstname=admin
+		- admin-lastname=admin
+		- admin-email=admin@admin.com
+		- admin-user=admin
+		- admin-password=admin123
+		- language=en_US
+		- currency=USD
+		- timezone=America/Chicago
+		- use-rewrites=1
+		- elasticsearch-host=elasticsearch
+		- session-save=redis
+		- session-save-redis-host=redis
+		- session-save-redis-db=0 --session-save-redis-password=""
+		- cache-backend=redis
+		- cache-backend-redis-server=redis
+		- cache-backend-redis-db=1
+		- page-cache=redis
+		- page-cache-redis-server=redis
+		- page-cache-redis-db=2
+		- amqp-host="rabbitmq"
+		- amqp-port="5672"
+		- amqp-user="guest"
+		- amqp-password="guest"
+		- amqp-virtualhost="/"
 
-__3) Create new or add existing Magento project__
+__B) Run already existing Magento project__
 
-- Create new project
-	- ```sh bin/new-project.sh```
-		- Keys can be found in https://marketplace.magento.com/customer/accessKeys/
+1) Run ```sh bin/start.sh```
 
-- Add existing project
+2) Add existing project
 	- Paste your existing Magento project to magento folder  
 
-__4) Install Magento__
+__Setup Xdebug in IDE__
 
-- ```sh bin/install.sh```
-
-__5) Setup Xdebug in IDE__
-
-- PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a browser) and correct settings should be similar to this:
+1) Run ```sh bin/xdebug.sh debug```
+	- You can turn off Xdebug by running ```sh bin/xdebug.sh off``` and turn it on again with ```sh bin/xdebug.sh debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)  
+2) PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a browser) and correct settings should be similar to this:
 
 Preferences - PHP - Debug
 

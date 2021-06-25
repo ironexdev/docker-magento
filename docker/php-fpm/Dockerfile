@@ -4,6 +4,7 @@ FROM php:7.4.19-fpm-alpine
 RUN apk add zlib-dev
 RUN apk add jpeg-dev
 RUN apk add libpng-dev
+RUN apk add freetype-dev
 
 # php intl dependencies
 RUN apk add icu-dev
@@ -20,7 +21,7 @@ RUN apk add libzip-dev
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
-RUN docker-php-ext-configure gd --with-jpeg
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install soap
@@ -41,10 +42,10 @@ RUN apk add composer
 ARG GROUP_ID
 ARG USER_ID
 
-RUN addgroup -g $GROUP_ID -S lopata
+RUN addgroup -g $GROUP_ID -S dockeruser
 
-RUN adduser -S -G lopata -u $USER_ID -s /bin/ash lopata
+RUN adduser -S -G dockeruser -u $USER_ID -s /bin/ash dockeruser
 
-USER lopata
+USER dockeruser
 
 EXPOSE 9000

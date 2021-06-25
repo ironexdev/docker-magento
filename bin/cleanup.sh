@@ -1,15 +1,10 @@
 #!/bin/sh
 
-docker-compose down
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -u)
 
-docker container rm $(docker container ls -aq)
+# Stop running containers, remove images and volumes
+sh bin/stop.sh -v --rmi all
 
-docker image rm $(docker image ls -aq) --force
-
-echo "###### docker container ls -a"
-
-docker container ls -a
-
-echo "###### docker image ls"
-
-docker image ls
+# Remove stopped containers
+docker-compose rm
