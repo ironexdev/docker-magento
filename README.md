@@ -33,35 +33,35 @@ __A) Create brand new Magento project__
 	- Make sure "magento" folder exists and is owned by current user before you bind it to the container by running the script above, otherwise it will be created by Docker and owned by root.
 	- Keys can be found in https://marketplace.magento.com/customer/accessKeys/ and you can opt-in to store your keys (login and password) to /home/docker/.composer/auth.json, which is bind mounted to docker/php-fpm/auth.json
 	- Magento default settings - these can be edited in bin/new-project.sh
-		- base-url=http://magento.local
-		- db-host=mysql
-		- db-name=magento
-		- db-user=magento
-		- db-password=magento
-		- admin-firstname=admin
-		- admin-lastname=admin
-		- admin-email=admin@admin.com
-		- admin-user=admin
-		- admin-password=admin123
-		- language=en_US
-		- currency=USD
-		- timezone=America/Chicago
-		- use-rewrites=1
-		- elasticsearch-host=elasticsearch
-		- session-save=redis
-		- session-save-redis-host=redis
-		- session-save-redis-db=0 --session-save-redis-password=""
-		- cache-backend=redis
-		- cache-backend-redis-server=redis
-		- cache-backend-redis-db=1
-		- page-cache=redis
-		- page-cache-redis-server=redis
-		- page-cache-redis-db=2
-		- amqp-host="rabbitmq"
-		- amqp-port="5672"
-		- amqp-user="guest"
-		- amqp-password="guest"
-		- amqp-virtualhost="/"
+		- ```base-url=http://magento.local```
+		- ```db-host=mysql```
+		- ```db-name=magento```
+		- ```db-user=magento```
+		- ```db-password=magento```
+		- ```admin-firstname=admin```
+		- ```admin-lastname=admin```
+		- ```admin-email=admin@admin.com```
+		- ```admin-user=admin```
+		- ```admin-password=admin123```
+		- ```language=en_US```
+		- ```currency=USD```
+		- ```timezone=America/Chicago```
+		- ```use-rewrites=1```
+		- ```elasticsearch-host=elasticsearch```
+		- ```session-save=redis```
+		- ```session-save-redis-host=redis```
+		- ```session-save-redis-db=0 --session-save-redis-password=""```
+		- ```cache-backend=redis```
+		- ```cache-backend-redis-server=redis```
+		- ```cache-backend-redis-db=1```
+		- ```page-cache=redis```
+		- ```page-cache-redis-server=redis```
+		- ```page-cache-redis-db=2```
+		- ```amqp-host="rabbitmq"```
+		- ```amqp-port="5672"```
+		- ```amqp-user="guest"```
+		- ```amqp-password="guest"```
+		- ```amqp-virtualhost="/"```
 
 __B) Run already existing Magento project__
 
