@@ -72,7 +72,7 @@ __B) Run already existing Magento project__
 
 __Cleanup__
 - Stop and remove all containers, images and volumes of the project
-	- Run ``` sh bin/cleanup.sh -v```
+	- Run ``` sh bin/cleanup.sh```
 
 __Setup Xdebug in IDE__
 
