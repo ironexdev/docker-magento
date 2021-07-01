@@ -18,18 +18,11 @@ while true; do
     esac
 done
 
-# Create magento folder if it does not exist
-magento="magento"
-
-if [ ! -d $magento ]
-then
-    mkdir $magento
-fi
-
 # Create .composer folder if it does not exist
 composer=".composer"
 
-if test -d "$composer"; then
+if [ ! -d $composer ]
+then
     mkdir $composer
 fi
 
