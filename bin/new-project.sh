@@ -23,7 +23,14 @@ magento="magento"
 
 if [ ! -d $magento ]
 then
-    mkidr $magento
+    mkdir $magento
+fi
+
+# Create auth.json file if it does not exist
+auth="auth.json"
+
+if test -f "$auth"; then
+    echo "" > docker/php-fpm/auth.json
 fi
 
 # Build images and create and start containers
