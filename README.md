@@ -84,4 +84,6 @@ Preferences - PHP - Servers
 
 ![Preferences - PHP - Servers](https://i.ibb.co/GVqfVs5/phpstorm.jpg "Preferences - PHP - Servers")
 
-
+__Cleanup__
+- Stop and remove all containers, images and volumes of the project
+	- Run ``` sh bin/cleanup.sh```
