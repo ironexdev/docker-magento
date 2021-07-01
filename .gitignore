@@ -1,4 +1,4 @@
 magento
-docker/php-fpm/auth.json
+docker/php-fpm/.composer/auth.json
 .idea
 .DS_Store

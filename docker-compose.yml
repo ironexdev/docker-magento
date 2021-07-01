@@ -15,7 +15,7 @@ services:
     volumes:
       - ./magento:/home/dockeruser/magento
       - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
-      - ./docker/php-fpm/auth.json:/home/dockeruser/.composer/auth.json
+      - ./docker/php-fpm/.composer:/home/dockeruser/.composer
 
   app-server:
     build:

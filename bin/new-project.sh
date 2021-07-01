@@ -26,11 +26,11 @@ then
     mkdir $magento
 fi
 
-# Create auth.json file if it does not exist
-auth="auth.json"
+# Create .composer folder if it does not exist
+composer=".composer"
 
-if test -f "$auth"; then
-    echo "" > docker/php-fpm/auth.json
+if test -d "$composer"; then
+    mkdir $composer
 fi
 
 # Build images and create and start containers
