@@ -15,7 +15,7 @@
 
 ## Currently supported versions of Magento
 
-- 2.4.x
+- 2.4.0, 2.4.1, 2.4.2, 2.4.3, 2.4.4
 
 ## Setup
 
