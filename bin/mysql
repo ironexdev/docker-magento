@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. bin/docker/variables
+
+# Run Magento command
+docker-compose exec mysql mysql -u magento -pmagento

@@ -8,23 +8,25 @@ services:
         USER_ID: $USER_ID
       context: .
       dockerfile: ./docker/php-fpm/Dockerfile
+    command: sh -c "cd /home/dockeruser && chown $USER_ID:$GROUP_ID magento && php-fpm"
     container_name: docker-magento_php-fpm
     networks:
       - internal
-    user: $GROUP_ID:$USER_ID
+    user: $USER_ID:$GROUP_ID
     volumes:
       - ./magento:/home/dockeruser/magento
       - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
       - ./docker/php-fpm/.composer:/home/dockeruser/.composer
 
-  app-server:
+  nginx:
     build:
       args:
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: .
-      dockerfile: ./docker/app-server/Dockerfile
-    container_name: docker-magento_app-server
+      dockerfile: ./docker/nginx/Dockerfile
+    command: sh -c "cd /home/dockeruser && chown $USER_ID:$GROUP_ID magento && nginx -g 'daemon off;'"
+    container_name: docker-magento_nginx
     depends_on:
       - php-fpm
     networks:
@@ -32,10 +34,11 @@ services:
       - internal
     ports:
       - 80:8080
-    user: $GROUP_ID:$USER_ID
+    user: $USER_ID:$GROUP_ID
     volumes:
       - ./magento:/home/dockeruser/magento
-      - ./docker/app-server/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - nginx_logs:/var/log/nginx
 
   mysql:
     build:
@@ -59,19 +62,56 @@ services:
       dockerfile: ./docker/elasticsearch/Dockerfile
     container_name: docker-magento_elasticsearch
     environment:
-      discovery.type: "single-node"
-      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+      ELASTIC_PASSWORD: changeme
+      ES_JAVA_OPTS: "-Xms1g -Xmx2g"
     networks:
       - internal
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+      - ./docker/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+
+  logstash:
+    build:
+      context: .
+      dockerfile: ./docker/logstash/Dockerfile
+    container_name: docker-magento_logstash
+    depends_on:
+      - elasticsearch
+    environment:
+      LS_JAVA_OPTS: "-Xmx1g -Xms1g"
+    networks:
+      - internal
+    volumes:
+      - ./docker/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./docker/logstash/pipeline:/usr/share/logstash/pipeline
+
+  filebeat:
+    build:
+      context: .
+      dockerfile: ./docker/filebeat/Dockerfile
+    container_name: docker-magento_filebeat
+    depends_on:
+      - elasticsearch
+    networks:
+      - internal
+    volumes:
+      - ./docker/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - nginx_logs:/var/log/nginx
+      - ./magento/var/log:/var/log/magento
+      - ./magento/var/report:/var/report/magento
 
   kibana:
     build:
       context: .
       dockerfile: ./docker/kibana/Dockerfile
     container_name: docker-magento_kibana
+    depends_on:
+      - elasticsearch
     networks:
       - internal
     platform: linux/amd64
+    volumes:
+      - ./docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   rabbitmq:
     build:
@@ -104,6 +144,15 @@ services:
       context: .
       dockerfile: ./docker/adminer/Dockerfile
     container_name: docker-magento_adminer
+    depends_on:
+      - mysql
+    networks:
+      - internal
+
+  mailhog:
+    build:
+      context: .
+      dockerfile: ./docker/mailhog/Dockerfile
     networks:
       - internal
 
@@ -112,4 +161,8 @@ networks:
   external:
 
 volumes:
+  elasticsearch:
   mysql:
+  nginx_logs:
+  magento_logs:
+  magento_reports:

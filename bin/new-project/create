@@ -1,7 +1,6 @@
 #!/bin/sh
 
-export USER_ID=$(id -u)
-export GROUP_ID=$(id -u)
+. bin/docker/variables
 
 if [ -z $1 ]
   then echo "Please select Magento 2 version. Currently supported versions: 2.4.x";
@@ -27,16 +26,17 @@ then
 fi
 
 # Build images and create and start containers
-sh bin/build.sh --no-cache
-sh bin/start.sh
+bin/docker/build --no-cache
+bin/docker/start
 
 # Create new project
-rm magento/.placeholder
-sh bin/composer.sh create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 .
+find magento/* ! -name var -delete
+docker-compose exec -T php-fpm sh -c 'composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 /home/dockeruser/temp && rm -rf /home/dockeruser/temp/var/log && rm -rf /home/dockeruser/temp/var/report && cp -r /home/dockeruser/temp/. /home/dockeruser/magento && rm -rf /home/dockeruser/temp'
 
 # Install Magento
 docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:install \
 --base-url=http://magento.local \
+--backend-frontname=admin \
 --db-host=mysql \
 --db-name=magento \
 --db-user=magento \
@@ -51,6 +51,9 @@ docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:instal
 --timezone=America/Chicago \
 --use-rewrites=1 \
 --elasticsearch-host=elasticsearch \
+--elasticsearch-enable-auth=1 \
+--elasticsearch-username="elastic" \
+--elasticsearch-password="changeme" \
 --session-save=redis \
 --session-save-redis-host=redis \
 --session-save-redis-db=0 --session-save-redis-password="" \
@@ -65,3 +68,20 @@ docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:instal
 --amqp-user="guest" \
 --amqp-password="guest" \
 --amqp-virtualhost="/"
+
+# Set developer mode
+bin/magento deploy:mode:set developer
+
+# Two factor authentication is enabled by default since version 2.4.0
+bin/magento module:disable Magento_TwoFactorAuth
+
+# Set SMTP host
+bin/magento config:set system/smtp/host mailhog
+# Set SMTP port
+bin/magento config:set system/smtp/port 1025
+echo "Mailhog has been configured."
+
+bin/magento config:set admin/security/use_form_key 0
+echo "Secret key in admin urls was disabled."
+
+bin/magento cache:flush

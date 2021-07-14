@@ -28,11 +28,11 @@ __Add following to etc/hosts__
 
 __A) Create brand new Magento project__
 
-1) Run ```sh bin/new-project.sh <version>```
+1) Run ```bin/new-project/create <version>```
 	- Requires Magento version as an argument
 	- Make sure "magento" folder exists and is owned by current user before you bind it to the container by running the script above, otherwise it will be created by Docker and owned by root.
 	- Keys can be found in https://marketplace.magento.com/customer/accessKeys/ and you can opt-in to store your keys (login and password) to /home/docker/.composer/auth.json, which is bind mounted to docker/php-fpm/auth.json
-	- Magento default settings - these can be edited in bin/new-project.sh
+	- Magento default settings - these can be edited in bin/new-project/create
 		- ```base-url=http://magento.local```
 		- ```db-host=mysql```
 		- ```db-name=magento```
@@ -65,15 +65,15 @@ __A) Create brand new Magento project__
 
 __B) Run already existing Magento project__
 
-1) Run ```sh bin/start.sh```
+1) Run ```bin/docker/start```
 
 2) Add existing project
 	- Paste your existing Magento project to magento folder  
 
 __Setup Xdebug in IDE__
 
-1) Run ```sh bin/xdebug.sh debug```
-	- You can turn off Xdebug by running ```sh bin/xdebug.sh off``` and turn it on again with ```sh bin/xdebug.sh debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)  
+1) Run ```bin/ide/xdebug debug```
+	- You can turn off Xdebug by running ```bin/ide/xdebug off``` and turn it on again with ```bin/ide/xdebug debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)  
 2) PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a browser) and correct settings should be similar to this:
 
 Preferences - PHP - Debug
@@ -84,6 +84,19 @@ Preferences - PHP - Servers
 
 ![Preferences - PHP - Servers](https://i.ibb.co/GVqfVs5/phpstorm.jpg "Preferences - PHP - Servers")
 
+__Setup Nginx and Magento logs in Kibana__
+
+1) TODO
+
 __Cleanup__
 - Stop and remove all containers, images and volumes of the project
-	- Run ``` sh bin/cleanup.sh```
+	- Run ``` bin/docker/cleanup```
+
+## Useful information
+
+- Reference for bin/magento setup:config:set command
+	- https://devdocs.magento.com/guides/v2.4/config-guide/prod/config-reference-sens.html
+	
+## Troubleshooting
+
+- TODO

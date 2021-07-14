@@ -15,4 +15,8 @@ RUN touch /var/run/nginx.pid
 
 RUN chown -R dockeruser:dockeruser /var/run/nginx.pid
 
+RUN unlink /var/log/nginx/access.log && touch /var/log/nginx/access.log && chown dockeruser /var/log/nginx/access.log
+
+RUN unlink /var/log/nginx/error.log && touch /var/log/nginx/error.log && chown dockeruser /var/log/nginx/error.log
+
 USER dockeruser

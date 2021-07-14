@@ -1,0 +1,39 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/nginx/error.log
+  tags: ["nginx_error"]
+- type: log
+  enabled: true
+  paths:
+    - /var/log/magento/debug.log
+  tags: ["magento_debug"]
+- type: log
+  enabled: true
+  paths:
+    - /var/log/magento/exception.log
+  tags: ["magento_exception"]
+- type: log
+  enabled: true
+  paths:
+    - /var/log/magento/system.log
+  tags: ["magento_system"]
+- type: log
+  enabled: true
+  paths:
+    - /var/report/magento/*
+  tags: ["magento_report"]
+
+output.logstash:
+  enabled: true
+  hosts: ["logstash:5044"]
+
+# output.elasticsearch:
+#   hosts: ["http://elasticsearch:9200"]
+#   username: "elastic"
+#   password: "changeme"
+setup.kibana:
+  host: "http://kibana:5601"
+  username: "elastic"
+  password: "changeme"

@@ -1,7 +1,6 @@
 #!/bin/sh
 
-export USER_ID=$(id -u)
-export GROUP_ID=$(id -u)
+. bin/docker/variables
 
 # Find and replace everything after "xdebug.mode=" until end of the line with the argument and restart php-fpm container
 

@@ -1,4 +1,4 @@
-magento
-docker/php-fpm/.composer/auth.json
+docker/php-fpm/.composer/*
+!docker/php-fpm/.composer/.placeholder
 .idea
 .DS_Store
