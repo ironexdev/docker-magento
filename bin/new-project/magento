@@ -17,14 +17,6 @@ while true; do
     esac
 done
 
-# Create .composer folder if it does not exist
-composer=".composer"
-
-if [ ! -d $composer ]
-then
-    mkdir $composer
-fi
-
 # Build images and create and start containers
 bin/docker/build --no-cache
 bin/docker/start
@@ -67,7 +59,8 @@ docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:instal
 --amqp-port="5672" \
 --amqp-user="guest" \
 --amqp-password="guest" \
---amqp-virtualhost="/"
+--amqp-virtualhost="/" \
+--cleanup-database
 
 # Set developer mode
 bin/magento deploy:mode:set developer

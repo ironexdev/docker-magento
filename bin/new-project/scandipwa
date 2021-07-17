@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. bin/docker/variables
+
+rm -rf frontend/* frontend/.*
+
+# There is an issue when installing required sharp package on arm64
+# Switching php-fpm service platform to amd64 in docker-compose is a solution to this, but on m1 mac, there is an issue with memory (leak?) with this platform
+docker-compose exec node sh -c "cd /home/dockeruser/frontend && \
+yarn create scandipwa-app frontend &&\
+yarn start"

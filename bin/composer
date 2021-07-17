@@ -4,4 +4,4 @@ export USER_ID=$(id -u)
 export GROUP_ID=$(id -u)
 
 # Run Composer command
-docker-compose exec php-fpm /home/dockeruser/magento/composer "$@"
+docker-compose exec php-fpm sh -c "cd /home/dockeruser/magento && composer $@"

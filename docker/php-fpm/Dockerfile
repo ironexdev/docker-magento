@@ -1,5 +1,8 @@
 FROM php:7.4.19-fpm-alpine
 
+ARG GROUP_ID
+ARG USER_ID
+
 # php gd dependencies
 RUN apk add zlib-dev
 RUN apk add jpeg-dev
@@ -38,9 +41,6 @@ COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
 
 # Composer
 RUN apk add composer
-
-ARG GROUP_ID
-ARG USER_ID
 
 RUN addgroup -g $GROUP_ID -S dockeruser
 

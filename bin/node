@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. bin/docker/variables
+
+# Run Magento command
+docker-compose exec node sh -c "cd /home/dockeruser/frontend && $@"

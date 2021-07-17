@@ -1,3 +1,5 @@
+# ------ Work In Progress ------
+
 # Docker Magento 2
 
 ```Rootless containers```,
@@ -96,6 +98,9 @@ __Cleanup__
 
 - Reference for bin/magento setup:config:set command
 	- https://devdocs.magento.com/guides/v2.4/config-guide/prod/config-reference-sens.html
+
+- How to run Docker in Ubuntu VM on MacOS in order to get better performance
+	- https://medium.com/carvago-development/my-docker-on-macos-part-1-setup-ubuntu-virtual-machine-both-intel-and-apple-silicon-cpu-5d886af0ebba
 	
 ## Troubleshooting
 
