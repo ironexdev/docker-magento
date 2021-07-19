@@ -6,3 +6,4 @@ magento/*
 !magento/.placeholder
 .idea
 .DS_Store
+.cache
