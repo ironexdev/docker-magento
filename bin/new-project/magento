@@ -9,20 +9,21 @@ fi
 
 # Ask user before removing magento folder and then re-creating it
 while true; do
-    read -p "Running this command will remove magento folder including its contents and then re-create it. Do you wish to proceed Y/n?" yn
+    read -p "Running this command will remove contnet of magento folder. Do you wish to proceed Y/n?" yn
     case $yn in
-        [Yy]* ) rm -rf magento; mkdir magento; break;;
+        [Yy]* ) echo "Your sudo password is needed to cleanup magento folder."
+                cd magento || echo "folder magento does not exist" && exit
+                sudo find . ! -name ".placeholder" -exec rm -rf {} +
+                cd ..;;
         [Nn]* ) exit;;
         * ) echo "Please answer Y/n.";;
     esac
 done
 
-# Build images and create and start containers
-bin/docker/build --no-cache
+# Start containers
 bin/docker/start
 
 # Create new project
-find magento/* ! -name var -delete
 docker-compose exec -T php-fpm sh -c 'composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 /home/dockeruser/temp && rm -rf /home/dockeruser/temp/var/log && rm -rf /home/dockeruser/temp/var/report && cp -r /home/dockeruser/temp/. /home/dockeruser/magento && rm -rf /home/dockeruser/temp'
 
 # Install Magento
