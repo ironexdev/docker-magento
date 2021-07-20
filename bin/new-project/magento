@@ -9,16 +9,18 @@ fi
 
 # Ask user before removing magento folder and then re-creating it
 while true; do
-    read -p "Running this command will remove contnet of magento folder. Do you wish to proceed Y/n?" yn
+    read -p "Running this command will remove content of magento folder. Do you wish to proceed Y/n?" yn
     case $yn in
-        [Yy]* ) echo "Your sudo password is needed to cleanup magento folder."
-                cd magento || echo "folder magento does not exist" && exit
-                sudo find . ! -name ".placeholder" -exec rm -rf {} +
-                cd ..;;
+        [Yy]* ) break;;
         [Nn]* ) exit;;
         * ) echo "Please answer Y/n.";;
     esac
 done
+
+echo "Your sudo password is needed to cleanup magento folder."
+cd magento || (echo "folder magento does not exist" && exit)
+sudo find . ! -name ".placeholder" -exec rm -rf {} +
+cd ..
 
 # Start containers
 bin/docker/start
