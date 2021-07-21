@@ -12,6 +12,6 @@ sudo rm -rf magento/*
 sudo rm -rf magento/.*
 touch magento/.placeholder
 
-sudo rm -rf vsf/*
-sudo rm -rf vsf/.*
-touch vsf/.placeholder
+sudo rm -rf frontend/*
+sudo rm -rf frontend/.*
+touch frontend/.placeholder
