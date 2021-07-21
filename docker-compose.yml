@@ -27,7 +27,7 @@ services:
         USER_ID: $USER_ID
       context: .
       dockerfile: ./docker/node/Dockerfile
-    command: sh -c "cd /home/dockeruser && chown $USER_ID:$GROUP_ID frontend && tail -f /dev/null"
+    command: sh -c "cd /home/node && chown $USER_ID:$GROUP_ID frontend && tail -f /dev/null"
     container_name: docker-magento_node
     environment:
       MAGENTO_GRAPHQL: "http://magento.local/graphql"
@@ -35,7 +35,7 @@ services:
       - external
       - internal
     volumes:
-      - ./frontend:/home/dockeruser/frontend
+      - ./frontend:/home/node/frontend
 
   nginx:
     build:

@@ -26,7 +26,7 @@ cd ..
 bin/docker/start
 
 # Create new project
-docker-compose exec -T php-fpm sh -c 'composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 /home/dockeruser/temp && rm -rf /home/dockeruser/temp/var/log && rm -rf /home/dockeruser/temp/var/report && cp -r /home/dockeruser/temp/. /home/dockeruser/magento && rm -rf /home/dockeruser/temp'
+docker-compose exec php-fpm sh -c 'composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 /home/dockeruser/temp && rm -rf /home/dockeruser/temp/var/log && rm -rf /home/dockeruser/temp/var/report && cp -r /home/dockeruser/temp/. /home/dockeruser/magento && rm -rf /home/dockeruser/temp'
 
 # Install Magento
 docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:install \

@@ -7,3 +7,11 @@ sh bin/docker/stop -v --rmi all
 
 # Remove stopped containers
 docker-compose rm
+
+sudo rm -rf magento/*
+sudo rm -rf magento/.*
+touch magento/.placeholder
+
+sudo rm -rf vsf/*
+sudo rm -rf vsf/.*
+touch vsf/.placeholder
