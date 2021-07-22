@@ -30,7 +30,7 @@ services:
     command: sh -c "cd /home/node && chown $USER_ID:$GROUP_ID frontend && tail -f /dev/null"
     container_name: docker-magento_node
     environment:
-      MAGENTO_GRAPHQL: "http://magento.local/graphql"
+      MAGENTO_GRAPHQL: "http://nginx:8080/graphql"
     networks:
       - external
       - internal
