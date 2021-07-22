@@ -8,10 +8,13 @@ sh bin/docker/stop -v --rmi all
 # Remove stopped containers
 docker-compose rm
 
-sudo rm -rf magento/*
-sudo rm -rf magento/.*
-touch magento/.placeholder
-
-sudo rm -rf frontend/*
-sudo rm -rf frontend/.*
-touch frontend/.placeholder
+if [ "$1" = "reset" ];
+  then
+    echo "Your sudo password is needed to cleanup frontend and magento folders."
+    cd magento || (echo "folder magento does not exist" && exit)
+    sudo find . ! -name ".placeholder" -exec rm -rf {} +
+    cd ..
+    cd frontend || ( echo "folder frontend does not exist" && exit )
+    sudo find . ! -name ".placeholder" -exec rm -rf {} +
+    cd ..
+fi
