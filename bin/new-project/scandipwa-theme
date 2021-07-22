@@ -2,7 +2,12 @@
 
 . bin/docker/variables
 
-HOME="/home/dockeruser"
+HOME="/home/node"
+
+echo "Your sudo password is needed to cleanup frontend folder."
+cd frontend || ( echo "folder frontend does not exist" && exit )
+sudo find . ! -name ".placeholder" -exec rm -rf {} +
+cd ..
 
 docker-compose exec php-fpm sh -c "cd $HOME/magento && \
 mkdir $HOME/magento/localmodules && \

@@ -2,10 +2,13 @@
 
 . bin/docker/variables
 
-rm -rf frontend/* frontend/.*
+echo "Your sudo password is needed to cleanup frontend folder."
+cd frontend || ( echo "folder frontend does not exist" && exit )
+sudo find . ! -name ".placeholder" -exec rm -rf {} +
+cd ..
 
 # There is an issue when installing required sharp package on arm64
 # Switching php-fpm service platform to amd64 in docker-compose is a solution to this, but on m1 mac, there is an issue with memory (leak?) with this platform
-docker-compose exec node sh -c "cd /home/dockeruser && \
+docker-compose exec node sh -c "cd /home/node && \
 yarn create scandipwa-app frontend &&\
 yarn start"
