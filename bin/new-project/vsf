@@ -2,10 +2,8 @@
 
 . bin/docker/variables
 
-echo "Your sudo password is needed to cleanup frontend folder."
-cd frontend || ( echo "folder frontend does not exist" && exit )
-sudo find . ! -name ".placeholder" -exec rm -rf {} +
-cd ..
+# Cleanup frontend folder
+bin/helpers/cff
 
 # Start containers
 bin/docker/start

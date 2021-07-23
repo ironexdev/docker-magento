@@ -1,9 +1,6 @@
 docker/php-fpm/.composer/*
-!docker/php-fpm/.composer/.placeholder
 frontend/*
-!frontend/.placeholder
 magento/*
-!magento/.placeholder
 .idea
 .DS_Store
 .cache

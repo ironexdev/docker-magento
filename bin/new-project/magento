@@ -17,10 +17,8 @@ while true; do
     esac
 done
 
-echo "Your sudo password is needed to cleanup magento folder."
-cd magento || (echo "folder magento does not exist" && exit)
-sudo find . ! -name ".placeholder" -exec rm -rf {} +
-cd ..
+# Cleanup Magento folder
+bin/helpers/cmf
 
 # Start containers
 bin/docker/start

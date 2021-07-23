@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Cleanup Frontend Folder
+
+echo "Stopping running containers"
+
+bin/docker/stop
+
+rm -rf frontend
+
+# These folders have to be pre-created, because they are bind mounted into rootless containers
+# If they are not pre-created, then docker will automatically create them and they will be owned by root within containers
+
+mkdir frontend

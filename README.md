@@ -90,18 +90,38 @@ __Setup Nginx and Magento logs in Kibana__
 
 1) TODO
 
-__Cleanup__
-- Stop and remove all containers, images and volumes of the project
-	- Run ``` bin/docker/cleanup```
-
-## Useful information
-
-- Reference for bin/magento setup:config:set command
-	- https://devdocs.magento.com/guides/v2.4/config-guide/prod/config-reference-sens.html
-
-- How to run Docker in Ubuntu VM on MacOS in order to get better performance
-	- https://medium.com/carvago-development/my-docker-on-macos-part-1-setup-ubuntu-virtual-machine-both-intel-and-apple-silicon-cpu-5d886af0ebba
-	
-## Troubleshooting
-
-- TODO
+__Command Reference__
+- ``` bin/docker/build ```
+	- Build all images for services defined in docker-compose.yml file 
+		- Accepts service name/s as argument/s in case you want to build one or more specific services
+- ``` bin/docker/cleanup ```
+	- Stop and remove all containers, images and volumes of the project
+- ``` bin/docker/restart ```
+	- Restart all services (containers) defined within docker-compose file
+		- Accepts service name/s as argument/s in case you want to restart one or more specific services
+- ``` bin/docker/start ```	
+	- Start all services (containers) defined within docker-compose file
+		- Accepts service name/s as argument/s in case you want to start one or more specific services
+- ``` bin/docker/stop ```	
+	- Stop all services (containers) defined within docker-compose file
+		- Accepts service name/s as argument/s in case you want to stop one or more specific services
+- ``` bin/docker/variables ```
+	- This command is only used by other commands and it provides required variables for them, such as user and group id
+- ``` bin/helpers/cff ```
+	- Removes frontend folder, and creates it again
+- ``` bin/helpers/cmf ```
+	- Removes Magento folder, and creates it + other bind mounted folders
+- ``` bin/new-project/magento ```
+	- Creates new Magento project in magento folder
+- ``` bin/new-project/vsf ```
+	- Creates new VSF 2 project in frontend folder
+- ``` bin/composer ```
+	- Runs Composer command in magento folder within php-fpm container
+- ``` bin/magento ```
+	- Runs magento command in magento folder within php-fpm containe
+- ``` bin/mysql ```
+	- Runs mysql command within mysql container
+- ``` bin/node ```
+	- Runs supplied command within node container
+- ``` bin/xdebug ```
+	- Sets xdebug.mode to php.ini within php-fpm container and restarts it
