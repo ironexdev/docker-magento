@@ -82,11 +82,12 @@ __Currently supported versions of Magento__
 
 2) Run ```bin/docker/start```
 
-### Create new VSF 2 project with Magento 2 GraphQL integration
+### Create new Vue Storefront 2 project with Magento 2 GraphQL integration
 
 1) Run ```bin/new-project/vsf```
  	- Select Magento 2 integration
-	- Running this command will install Vue Storefront 2 project to frontend folder and start development server
+	- Running this command will install Vue Storefront 2 project to frontend folder and start development server on http://frontend.magento.local
+		- You can start VSF 2 with ```bin/node yarn dev```
 		- VSF 2 documentation https://docs.vuestorefront.io/v2/
 
 ### Configure Nginx and Magento logs to be viewed in Kibana
@@ -127,6 +128,7 @@ Preferences - PHP - Servers
 <img src="https://i.ibb.co/GVqfVs5/phpstorm.jpg" alt="Preferences - PHP - Servers" width="250px">
 
 ## Command Reference
+
 - ``` bin/docker/build ```
 	- Build all images for services defined in docker-compose.yml file 
 		- Accepts service name/s as argument/s in case you want to build one or more specific services
