@@ -37,7 +37,7 @@ __Currently supported versions of Magento__
 	- 127.0.0.1	rabbitmq.magento.local
 	- 127.0.0.1	adminer.magento.local
 
-### I. a) Create new Magento project
+### Create new Magento project
 
 1) Run ```bin/new-project/magento <version>```
 	- This will install new Magento project to "magento" folder
@@ -75,20 +75,21 @@ __Currently supported versions of Magento__
 		- ```amqp-password="guest"```
 		- ```amqp-virtualhost="/"```
 
-### I. b) Run already existing Magento project
+### Run already existing Magento project
 
 1) Add existing project
 	- Paste your existing Magento project to magento folder  
 
 2) Run ```bin/docker/start```
 
-### II. Create new VSF 2 project
+### Create new VSF 2 project with Magento 2 GraphQL integration
 
 1) Run ```bin/new-project/vsf```
+ 	- Select Magento 2 integration
 	- Running this command will install Vue Storefront 2 project to frontend folder and start development server
 		- VSF 2 documentation https://docs.vuestorefront.io/v2/
 
-### III. Configure Nginx and Magento logs to be viewed in Kibana
+### Configure Nginx and Magento logs to be viewed in Kibana
 
 1) Go to http://kibana.magento.local/app/management/kibana/indexPatterns in your browser
 2) If Magento installation was successful, then there should be "You have data in Elasticsearch. Now, create an index pattern." title on the page and "Create index pattern" button. Click on it.
@@ -111,7 +112,7 @@ Kibana should now be configured to display 5 types of logs: nginx error log (```
 
 <img src="https://user-images.githubusercontent.com/24256329/126874664-a47f924e-84d7-43bb-9275-154b96618f17.png" alt="Filter by tags" width="250px">
 
-### IV. Setup Xdebug in IDE
+### Configure Xdebug
 
 1) Run ```bin/ide/xdebug debug```
 	- You can turn off Xdebug by running ```bin/ide/xdebug off``` and turn it on again with ```bin/ide/xdebug debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)  
