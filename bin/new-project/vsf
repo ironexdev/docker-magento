@@ -2,11 +2,11 @@
 
 . bin/docker/variables
 
-# Stop running containers
-bin/docker/stop
+# Remove Frontend folder
+bin/helpers/remove-frontend-folder
 
-# Cleanup frontend folder
-bin/helpers/cff
+# Create bind mounted folders
+bin/helpers/create-bind-mounted-folders
 
 # Start containers
 bin/docker/start

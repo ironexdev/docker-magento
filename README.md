@@ -145,12 +145,16 @@ Preferences - PHP - Servers
 		- Accepts service name/s as argument/s in case you want to stop one or more specific services
 - ``` bin/docker/variables ```
 	- This command is only used by other commands and it provides required variables for them, such as user and group id
-- ``` bin/helpers/cff ```
-	- Removes frontend folder, and creates it again
-- ``` bin/helpers/cmf ```
-	- Removes Magento folder, and creates it + other bind mounted folders
+- ``` bin/helpers/create-bind-mounted-folders```
+	- Stops containers, checks if bind mounted folders specified in docker-compose.yml file exist and creates them if they don't
+- ``` bin/helpers/fix-filebeat-permissions ```
+	- Filebeat container requires filebeat.yml to be only writtable by the owner
+- ``` bin/helpers/remove-frontend-folder ```
+	- Stops containers and removes frontend folder
+- ``` bin/helpers/remove-magento-folder ```
+	- Stops containers and removes Magento folder
 - ``` bin/new-project/magento ```
-	- Creates new Magento project in magento folder
+	- Creates new Magento project in Magento folder
 - ``` bin/new-project/vsf ```
 	- Creates new VSF 2 project in frontend folder
 - ``` bin/composer ```
@@ -168,5 +172,5 @@ Preferences - PHP - Servers
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container
 - You might encounter permission issues if you manually delete one of bind mounted folders, because docker will automatically recreate them with root permissions, which means, that your containers won't have write access to them, because all containers are running in rootless mode.
-- If filebeat container stops with the error below, then remove the container and run bin/helpers/ffp and then bin/docker/start
+- If filebeat container stops with the error below, then remove the container (or run bin/docker/cleanup to remove all containers and images) and run bin/helpers/fix-filebeat-permissions and then bin/docker/start
   - ```Exiting: error loading config file: config file ("filebeat.yml") can only be writable by the owner but the permissions are "-rw-rw-r--" (to fix the permissions use: 'chmod go-w /usr/share/filebeat/filebeat.yml')```

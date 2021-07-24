@@ -1,0 +1,36 @@
+#!/bin/sh
+
+echo "Stopping running containers"
+
+# If containers with bind mounted folders are running, then deleted folders will be immediatelly re-created by Docker with root permissions
+bin/docker/stop
+
+if [ ! -d "magento" ]
+then
+    mkdir magento
+    echo "Created magento folder"
+fi
+
+if [ ! -d "magento/var" ]
+then
+    mkdir magento/var
+    echo "Created magento/var folder"
+fi
+
+if [ ! -d "magento/var/log" ]
+then
+    mkdir magento/var/log
+    echo "Created magento/var/log folder"
+fi
+
+if [ ! -d "magento/var/report" ]
+then
+    mkdir magento/var/report
+    echo "Created magento/var/report folder"
+fi
+
+if [ ! -d "frontend" ]
+then
+    mkdir frontend
+    echo "Created frontend folder"
+fi

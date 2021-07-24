@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "Stopping running containers"
+
+# If containers with bind mounted folders are running, then deleted folders will be immediatelly re-created by Docker with root permissions
+bin/docker/stop
+
+rm -rf frontend

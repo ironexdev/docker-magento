@@ -17,14 +17,14 @@ while true; do
     esac
 done
 
-# Stop running containers
-bin/docker/stop
-
 # Fix filebeat.yml permissions
-bin/helpers/ffp
+bin/helpers/fix-filebeat-permissions
 
-# Cleanup Magento folder
-bin/helpers/cmf
+# Remove Magento folder
+bin/helpers/remove-magento-folder
+
+# Create bind mounted folders
+bin/helpers/create-bind-mounted-folders
 
 # Start containers
 bin/docker/start
