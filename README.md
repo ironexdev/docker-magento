@@ -1,4 +1,6 @@
-# Docker Magento
+# Docker development environment for Magento 2
+
+Includes optional integration with Vue Storefront 2
 
 ```Rootless containers```,
 ```Docker```,
@@ -14,8 +16,6 @@
 ```Elastic Search```,
 ```Logstash```,
 ```Kibana```
-
-Development environment for running Magento 2 with native frontend or Vue Storefront 2
 
 __Currently supported versions of Magento__
 
