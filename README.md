@@ -1,7 +1,4 @@
-# ------ Work In Progress ------
-
 # Docker Magento
-- Development environment for running Magento 2 with native frontend or Vue Storefront 2
 
 ```Rootless containers```,
 ```Docker```,
@@ -18,13 +15,15 @@
 ```Logstash```,
 ```Kibana```
 
-## Currently supported versions of Magento
+Development environment for running Magento 2 with native frontend or Vue Storefront 2
+
+__Currently supported versions of Magento__
 
 - 2.4.0, 2.4.1, 2.4.2, 2.4.3, 2.4.4
 
 ## Setup
 
-__Requirements and Prerequsites__
+### Requirements and Prerequsites
 
 - Have at least 16 GB RAM on your host system
 - (MacOS, Windows) Allocate at least 5 GB RAM to Docker Desktop
@@ -38,7 +37,7 @@ __Requirements and Prerequsites__
 	- 127.0.0.1	rabbitmq.magento.local
 	- 127.0.0.1	adminer.magento.local
 
-__Create new Magento project__
+### I. a) Create new Magento project
 
 1) Run ```bin/new-project/magento <version>```
 	- This will install new Magento project to "magento" folder
@@ -76,20 +75,43 @@ __Create new Magento project__
 		- ```amqp-password="guest"```
 		- ```amqp-virtualhost="/"```
 
-__Run already existing Magento project__
+### I. b) Run already existing Magento project
 
 1) Add existing project
 	- Paste your existing Magento project to magento folder  
 
 2) Run ```bin/docker/start```
 
-__Create new VSF 2 project__
+### II. Create new VSF 2 project
 
 1) Run ```bin/new-project/vsf```
 	- Running this command will install Vue Storefront 2 project to frontend folder and start development server
 		- VSF 2 documentation https://docs.vuestorefront.io/v2/
 
-__Setup Xdebug in IDE__
+### III. Configure Nginx and Magento logs to be viewed in Kibana
+
+1) Go to http://kibana.magento.local/app/management/kibana/indexPatterns in your browser
+2) If Magento installation was successful, then there should be "You have data in Elasticsearch. Now, create an index pattern." title on the page and "Create index pattern" button. Click on it.
+
+<img src="https://user-images.githubusercontent.com/24256329/126873547-bc92a3fc-bb65-421d-be27-e538b21bf4f5.png" alt="Create index pattern" width="250px">
+
+3) On the next page, write "weblogs-*" into the text input and click on "Next step" button
+
+<img src="https://user-images.githubusercontent.com/24256329/126873590-0c051030-aa5a-42fa-a49f-ebbb85133d3b.png" alt="weblogs-*" width="250px">
+
+4) Select @timestamp from dropdown and click on "Create index pattern" button
+
+<img src="https://user-images.githubusercontent.com/24256329/126874296-5d9cb6e6-2477-4686-b0b4-a8bb0a8fc795.png" alt="@timestamp" width="250px">
+
+5) All done. You should be able to analyse your logs on http://kibana.magento.local/app/discover (if not, then refresh magento.local in order to log something).
+
+<img src="https://user-images.githubusercontent.com/24256329/126874474-54594eb2-3b41-4e24-ba18-528aef0c1859.png" alt="Analyse logs" width="250px">
+
+Kibana should now be configured to display 5 types of logs: nginx error log (```nginx_error```), magento debug log (```magento_debug```), magento exception log (```magento_exception```), magento system log (```magento_system```) and magento reports (```magento_report```). Each log has its own tag (values in brackets), that can be used to filter search results in Kibana - click on "+ Add filter" on the left side and type in the name of the log you want to search in.
+
+<img src="https://user-images.githubusercontent.com/24256329/126874664-a47f924e-84d7-43bb-9275-154b96618f17.png" alt="Filter by tags" width="250px">
+
+### IV. Setup Xdebug in IDE
 
 1) Run ```bin/ide/xdebug debug```
 	- You can turn off Xdebug by running ```bin/ide/xdebug off``` and turn it on again with ```bin/ide/xdebug debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)  
@@ -97,17 +119,13 @@ __Setup Xdebug in IDE__
 
 Preferences - PHP - Debug
 
-![Preferences - PHP - Debug](https://i.ibb.co/BZJ4hjz/phpstorm-2.jpg "Preferences - PHP - Debug")
+<img src="https://i.ibb.co/BZJ4hjz/phpstorm-2.jpg" alt="Preferences - PHP - Debug" width="250px">
 
 Preferences - PHP - Servers
 
-![Preferences - PHP - Servers](https://i.ibb.co/GVqfVs5/phpstorm.jpg "Preferences - PHP - Servers")
+<img src="https://i.ibb.co/GVqfVs5/phpstorm.jpg" alt="Preferences - PHP - Servers" width="250px">
 
-__Setup Nginx and Magento logs in Kibana__
-
-1) TODO
-
-__Command Reference__
+## Command Reference
 - ``` bin/docker/build ```
 	- Build all images for services defined in docker-compose.yml file 
 		- Accepts service name/s as argument/s in case you want to build one or more specific services
@@ -143,9 +161,7 @@ __Command Reference__
 - ``` bin/xdebug ```
 	- Sets xdebug.mode to php.ini within php-fpm container and restarts it
 
-__Troubleshooting__
+## Troubleshooting
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container
 - You might encounter permission issues if you manually delete one of bind mounted folders, because docker will automatically recreate them with root permissions, which means, that your containers won't have write access to them, because all containers are running in rootless mode.
-
-__Service map (structure of docker-compose.yml)__
