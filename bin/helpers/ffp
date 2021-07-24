@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Fix Filebeat configuration file permissions - filebeat.yml can only be writtable by the owner
+
+chmod 755 docker/filebeat/filebeat.yml

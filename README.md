@@ -78,7 +78,7 @@ __Currently supported versions of Magento__
 ### Run already existing Magento project
 
 1) Add existing project
-	- Paste your existing Magento project to magento folder  
+	- Paste your existing Magento project to magento folder
 
 2) Run ```bin/docker/start```
 
@@ -116,7 +116,7 @@ Kibana should now be configured to display 5 types of logs: nginx error log (```
 ### Configure Xdebug
 
 1) Run ```bin/ide/xdebug debug```
-	- You can turn off Xdebug by running ```bin/ide/xdebug off``` and turn it on again with ```bin/ide/xdebug debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)  
+	- You can turn off Xdebug by running ```bin/ide/xdebug off``` and turn it on again with ```bin/ide/xdebug debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)
 2) PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a browser) and correct settings should be similar to this:
 
 Preferences - PHP - Debug
@@ -130,17 +130,17 @@ Preferences - PHP - Servers
 ## Command Reference
 
 - ``` bin/docker/build ```
-	- Build all images for services defined in docker-compose.yml file 
+	- Build all images for services defined in docker-compose.yml file
 		- Accepts service name/s as argument/s in case you want to build one or more specific services
 - ``` bin/docker/cleanup ```
 	- Stop and remove all containers, images and volumes of the project
 - ``` bin/docker/restart ```
 	- Restart all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to restart one or more specific services
-- ``` bin/docker/start ```	
+- ``` bin/docker/start ```
 	- Start all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to start one or more specific services
-- ``` bin/docker/stop ```	
+- ``` bin/docker/stop ```
 	- Stop all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to stop one or more specific services
 - ``` bin/docker/variables ```
@@ -168,3 +168,5 @@ Preferences - PHP - Servers
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container
 - You might encounter permission issues if you manually delete one of bind mounted folders, because docker will automatically recreate them with root permissions, which means, that your containers won't have write access to them, because all containers are running in rootless mode.
+- If filebeat container stops with the error below, then remove the container and run bin/helpers/ffp and then bin/docker/start
+  - ```Exiting: error loading config file: config file ("filebeat.yml") can only be writable by the owner but the permissions are "-rw-rw-r--" (to fix the permissions use: 'chmod go-w /usr/share/filebeat/filebeat.yml')```

@@ -17,6 +17,12 @@ while true; do
     esac
 done
 
+# Stop running containers
+bin/docker/stop
+
+# Fix filebeat.yml permissions
+bin/helpers/ffp
+
 # Cleanup Magento folder
 bin/helpers/cmf
 

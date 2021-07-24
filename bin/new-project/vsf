@@ -2,6 +2,9 @@
 
 . bin/docker/variables
 
+# Stop running containers
+bin/docker/stop
+
 # Cleanup frontend folder
 bin/helpers/cff
 
