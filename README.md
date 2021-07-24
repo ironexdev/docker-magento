@@ -147,8 +147,6 @@ Preferences - PHP - Servers
 	- This command is only used by other commands and it provides required variables for them, such as user and group id
 - ``` bin/helpers/create-bind-mounted-folders```
 	- Stops containers, checks if bind mounted folders specified in docker-compose.yml file exist and creates them if they don't
-- ``` bin/helpers/fix-filebeat-permissions ```
-	- Filebeat container requires filebeat.yml to be only writtable by the owner
 - ``` bin/helpers/remove-frontend-folder ```
 	- Stops containers and removes frontend folder
 - ``` bin/helpers/remove-magento-folder ```

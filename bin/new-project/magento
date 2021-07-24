@@ -17,9 +17,6 @@ while true; do
     esac
 done
 
-# Fix filebeat.yml permissions
-bin/helpers/fix-filebeat-permissions
-
 # Remove Magento folder
 bin/helpers/remove-magento-folder
 

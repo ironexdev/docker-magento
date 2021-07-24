@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Filebeat container requires filebeat.yml to be only writtable by the owner
-
-chmod 644 docker/filebeat/filebeat.yml
