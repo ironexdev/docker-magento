@@ -75,7 +75,7 @@ __Currently supported versions of Magento__
 		- ```amqp-password="guest"```
 		- ```amqp-virtualhost="/"```
 
-### Run already existing Magento project
+### Run an already existing Magento project
 
 1) Add existing project
 	- Paste your existing Magento project to magento folder
