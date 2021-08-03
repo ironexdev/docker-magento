@@ -27,6 +27,11 @@
 # trace
 # - Enables the Function Trace feature, which allows you record every function call, including arguments, variable assignment, and return value that is made during a request to a file.
 
-sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" docker/php-fpm/php.ini
+if [ $(uname) == "Darwin" ]
+then
+    sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" docker/php-fpm/php.ini
+else
+  sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" docker/php-fpm/php.ini
+fi
 
 docker-compose restart php-fpm
