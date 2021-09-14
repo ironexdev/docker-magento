@@ -1,0 +1,24 @@
+#!/bin/sh
+
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -u)
+
+if [ -z ${APP_DIRECTORY} ];
+then
+  export APP_DIRECTORY=$(pwd)
+fi
+
+if [ -z ${DOCKER_DIRECTORY} ];
+then
+  export DOCKER_DIRECTORY=${APP_DIRECTORY}/docker
+fi
+
+if [ -z ${MAGENTO_DIRECTORY} ];
+then
+  export MAGENTO_DIRECTORY=${APP_DIRECTORY}/magento
+fi
+
+if [ -z ${FRONTEND_DIRECTORY} ];
+then
+  export FRONTEND_DIRECTORY=${APP_DIRECTORY}/frontend
+fi

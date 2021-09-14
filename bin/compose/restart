@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. bin/compose/variables
+. bin/variables
 
 # Build images if needed and create and start containers
 docker-compose restart "$@"
