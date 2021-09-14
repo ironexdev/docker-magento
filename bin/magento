@@ -2,5 +2,9 @@
 
 . bin/variables
 
+cd ${DOCKER_DIRECTORY}
+
 # Run Magento command
 docker-compose exec php-fpm /home/dockeruser/magento/bin/magento "$@"
+
+cd ${APP_DIRECTORY}

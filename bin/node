@@ -2,5 +2,7 @@
 
 . bin/variables
 
+cd ${DOCKER_DIRECTORY}
+
 # Run Node command
 docker-compose exec node sh -c "cd /home/node/frontend && $@"

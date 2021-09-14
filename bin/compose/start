@@ -2,5 +2,9 @@
 
 . bin/variables
 
+cd ${DOCKER_DIRECTORY}
+
 # Build images if needed and create and start containers
 docker-compose up -d "$@"
+
+cd ${APP_DIRECTORY}

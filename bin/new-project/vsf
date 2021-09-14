@@ -11,6 +11,8 @@ ${DOCKER_DIRECTORY}/bin/helpers/create-bind-mounted-folders
 # Start containers
 ${DOCKER_DIRECTORY}/bin/compose/start
 
+cd ${DOCKER_DIRECTORY}
+
 # Init project
 docker-compose exec node sh -c "cd /home/node && \
 if [ -d temp ]; then rm -rf temp; fi && \
@@ -22,3 +24,5 @@ rm -rf /home/node/temp && \
 cd /home/node/frontend && \
 yarn install && \
 yarn dev"
+
+cd ${APP_DIRECTORY}

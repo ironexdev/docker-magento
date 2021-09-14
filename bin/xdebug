@@ -34,4 +34,8 @@ else
   sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" ${DOCKER_DIRECTORY}/images/php-fpm/php.ini
 fi
 
+cd ${DOCKER_DIRECTORY}
+
 docker-compose restart php-fpm
+
+cd ${APP_DIRECTORY}

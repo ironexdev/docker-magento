@@ -2,5 +2,9 @@
 
 . bin/variables
 
+cd ${DOCKER_DIRECTORY}
+
 # Run Mysql command
 docker-compose exec mysql mysql -u magento -pmagento
+
+cd ${APP_DIRECTORY}

@@ -2,5 +2,9 @@
 
 . bin/variables
 
+cd ${DOCKER_DIRECTORY}
+
 # Stop running containers
 docker-compose down "$@"
+
+cd ${APP_DIRECTORY}
