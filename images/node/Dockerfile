@@ -23,4 +23,6 @@ RUN yarn global add @vue-storefront/cli
 
 USER node
 
+WORKDIR /home/node
+
 EXPOSE 3000

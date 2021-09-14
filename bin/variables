@@ -4,6 +4,6 @@ export USER_ID=$(id -u)
 export GROUP_ID=$(id -u)
 
 export APP_DIRECTORY=$(pwd)
-export DOCKER_DIRECTORY=${APP_DIRECTORY}/docker
+export DOCKER_DIRECTORY=${APP_DIRECTORY}
 export MAGENTO_DIRECTORY=${APP_DIRECTORY}/magento
 export FRONTEND_DIRECTORY=${APP_DIRECTORY}/frontend

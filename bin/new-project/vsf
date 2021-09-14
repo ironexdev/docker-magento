@@ -3,13 +3,13 @@
 . bin/variables
 
 # Remove Frontend folder
-bin/helpers/remove-frontend-folder
+${DOCKER_DIRECTORY}/bin/helpers/remove-frontend-folder
 
 # Create bind mounted folders
-bin/helpers/create-bind-mounted-folders
+${DOCKER_DIRECTORY}/bin/helpers/create-bind-mounted-folders
 
 # Start containers
-bin/compose/start
+${DOCKER_DIRECTORY}/bin/compose/start
 
 # Init project
 docker-compose exec node sh -c "cd /home/node && \

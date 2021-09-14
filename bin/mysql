@@ -2,5 +2,5 @@
 
 . bin/variables
 
-# Run Magento command
+# Run Mysql command
 docker-compose exec mysql mysql -u magento -pmagento

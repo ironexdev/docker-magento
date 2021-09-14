@@ -29,9 +29,9 @@
 
 if [ $(uname) == "Darwin" ]
 then
-    sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" images/php-fpm/php.ini
+    sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" ${DOCKER_DIRECTORY}/images/php-fpm/php.ini
 else
-  sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" images/php-fpm/php.ini
+  sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" ${DOCKER_DIRECTORY}/images/php-fpm/php.ini
 fi
 
 docker-compose restart php-fpm

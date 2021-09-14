@@ -4,10 +4,11 @@ services:
   php-fpm:
     build:
       args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
-      context: .
-      dockerfile: ./images/php-fpm/Dockerfile
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/php-fpm/Dockerfile
     command: sh -c "cd /home/dockeruser && chown $USER_ID:$GROUP_ID magento && php-fpm"
     container_name: docker-magento_php-fpm
     depends_on:
@@ -16,17 +17,18 @@ services:
       - external
       - internal
     volumes:
-      - ./magento:/home/dockeruser/magento
-      - ./images/php-fpm/php.ini:/usr/local/etc/php/php.ini
-      - ./images/php-fpm/.composer:/home/dockeruser/.composer
+      - $MAGENTO_DIRECTORY:/home/dockeruser/magento
+      - $DOCKER_DIRECTORY/images/php-fpm/php.ini:/usr/local/etc/php/php.ini
+      - $DOCKER_DIRECTORY/images/php-fpm/.composer:/home/dockeruser/.composer
 
   node:
     build:
       args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
-      context: .
-      dockerfile: ./images/node/Dockerfile
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/node/Dockerfile
     command: sh -c "cd /home/node && chown $USER_ID:$GROUP_ID frontend && tail -f /dev/null"
     container_name: docker-magento_node
     environment:
@@ -35,15 +37,15 @@ services:
       - external
       - internal
     volumes:
-      - ./frontend:/home/node/frontend
+      - $FRONTEND_DIRECTORY:/home/node/frontend
 
   nginx:
     build:
       args:
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
-      context: .
-      dockerfile: ./images/nginx/Dockerfile
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/nginx/Dockerfile
     command: sh -c "cd /home/dockeruser && chown $USER_ID:$GROUP_ID magento && nginx -g 'daemon off;'"
     container_name: docker-magento_nginx
     depends_on:
@@ -58,14 +60,14 @@ services:
     ports:
       - 80:8080
     volumes:
-      - ./magento:/home/dockeruser/magento
-      - ./images/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - $MAGENTO_DIRECTORY:/home/dockeruser/magento
+      - $DOCKER_DIRECTORY/images/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - nginx_logs:/var/log/nginx
 
   mysql:
     build:
-      context: .
-      dockerfile: ./images/mysql/Dockerfile
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/mysql/Dockerfile
     container_name: docker-magento_mysql
     environment:
       MYSQL_DATABASE: "magento"
@@ -80,8 +82,10 @@ services:
 
   adminer:
     build:
-      context: .
-      dockerfile: ./images/adminer/Dockerfile
+      args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/adminer/Dockerfile
     container_name: docker-magento_adminer
     depends_on:
       - mysql
@@ -92,10 +96,11 @@ services:
   elasticsearch:
     build:
       args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
-      context: .
-      dockerfile: ./images/elasticsearch/Dockerfile
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/elasticsearch/Dockerfile
     container_name: docker-magento_elasticsearch
     environment:
       ELASTIC_PASSWORD: changeme
@@ -104,12 +109,14 @@ services:
       - internal
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
-      - ./images/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - $DOCKER_DIRECTORY/images/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   logstash:
     build:
-      context: .
-      dockerfile: ./images/logstash/Dockerfile
+      args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/logstash/Dockerfile
     container_name: docker-magento_logstash
     depends_on:
       - elasticsearch
@@ -118,28 +125,32 @@ services:
     networks:
       - internal
     volumes:
-      - ./images/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - ./images/logstash/pipeline:/usr/share/logstash/pipeline
+      - $DOCKER_DIRECTORY/images/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - $DOCKER_DIRECTORY/images/logstash/pipeline:/usr/share/logstash/pipeline
 
   filebeat:
     build:
-      context: .
-      dockerfile: ./images/filebeat/Dockerfile
+      args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/filebeat/Dockerfile
     container_name: docker-magento_filebeat
     depends_on:
       - logstash
     networks:
       - internal
     volumes:
-      - ./images/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - $DOCKER_DIRECTORY/images/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - nginx_logs:/var/log/nginx
-      - ./magento/var/log:/var/log/magento
-      - ./magento/var/report:/var/report/magento
+      - $MAGENTO_DIRECTORY/var/log:/var/log/magento
+      - $MAGENTO_DIRECTORY/var/report:/var/report/magento
 
   kibana:
     build:
-      context: .
-      dockerfile: ./images/kibana/Dockerfile
+      args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/kibana/Dockerfile
     container_name: docker-magento_kibana
     depends_on:
       - elasticsearch
@@ -148,12 +159,14 @@ services:
       - internal
     platform: linux/amd64
     volumes:
-      - ./images/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - $DOCKER_DIRECTORY/images/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   rabbitmq:
     build:
-      context: .
-      dockerfile: ./images/rabbitmq/Dockerfile
+      args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/rabbitmq/Dockerfile
     container_name: docker-magento_rabbitmq
     networks:
       - external
@@ -161,16 +174,20 @@ services:
 
   redis:
     build:
-      context: .
-      dockerfile: ./images/redis/Dockerfile
+      args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/redis/Dockerfile
     container_name: docker-magento_redis
     networks:
       - internal
 
   redis-admin:
     build:
-      context: .
-      dockerfile: ./images/redis-admin/Dockerfile
+      args:
+        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/redis-admin/Dockerfile
     container_name: docker-magento_redis-admin
     depends_on:
       - redis
@@ -182,8 +199,8 @@ services:
 
   mailhog:
     build:
-      context: .
-      dockerfile: ./images/mailhog/Dockerfile
+      context: $APP_DIRECTORY
+      dockerfile: $DOCKER_DIRECTORY/images/mailhog/Dockerfile
     container_name: docker-magento_mailhog
     networks:
       - internal

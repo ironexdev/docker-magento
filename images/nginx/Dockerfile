@@ -20,3 +20,5 @@ RUN unlink /var/log/nginx/access.log && touch /var/log/nginx/access.log && chown
 RUN unlink /var/log/nginx/error.log && touch /var/log/nginx/error.log && chown dockeruser /var/log/nginx/error.log
 
 USER dockeruser
+
+WORKDIR /home/dockeruser

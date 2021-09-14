@@ -1,7 +1,6 @@
 #!/bin/sh
 
-export USER_ID=$(id -u)
-export GROUP_ID=$(id -u)
+. bin/variables
 
 # Run Composer command
 docker-compose exec php-fpm sh -c "cd /home/dockeruser/magento && composer $@"

@@ -37,7 +37,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-3.0.4 \
     && docker-php-ext-enable xdebug
 
-COPY ./images/php-fpm/php.ini /usr/local/etc/php/php.ini
+COPY $DOCKER_DIRECTORY/images/php-fpm/php.ini /usr/local/etc/php/php.ini
 
 # Composer
 RUN apk add composer
@@ -47,5 +47,7 @@ RUN addgroup -g $GROUP_ID -S dockeruser
 RUN adduser -S -G dockeruser -u $USER_ID -s /bin/ash dockeruser
 
 USER dockeruser
+
+WORKDIR /home/dockeruser
 
 EXPOSE 9000

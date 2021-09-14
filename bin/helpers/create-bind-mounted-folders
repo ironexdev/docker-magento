@@ -3,34 +3,34 @@
 echo "Stopping running containers"
 
 # If containers with bind mounted folders are running, then deleted folders will be immediately re-created by Docker with root permissions
-bin/compose/stop
+${DOCKER_DIRECTORY}/bin/compose/stop
 
-if [ ! -d "magento" ]
+if [ ! -d ${MAGENTO_DIRECTORY} ]
 then
-    mkdir magento
-    echo "Created magento folder"
+    mkdir ${MAGENTO_DIRECTORY}
+    echo "Created ${MAGENTO_DIRECTORY} folder"
 fi
 
-if [ ! -d "magento/var" ]
+if [ ! -d "${MAGENTO_DIRECTORY}/var" ]
 then
-    mkdir magento/var
-    echo "Created magento/var folder"
+    mkdir ${MAGENTO_DIRECTORY}/var
+    echo "Created ${MAGENTO_DIRECTORY}/var folder"
 fi
 
-if [ ! -d "magento/var/log" ]
+if [ ! -d "${MAGENTO_DIRECTORY}/var/log" ]
 then
-    mkdir magento/var/log
-    echo "Created magento/var/log folder"
+    mkdir ${MAGENTO_DIRECTORY}/var/log
+    echo "Created ${MAGENTO_DIRECTORY}/var/log folder"
 fi
 
-if [ ! -d "magento/var/report" ]
+if [ ! -d "${MAGENTO_DIRECTORY}/var/report" ]
 then
     mkdir magento/var/report
-    echo "Created magento/var/report folder"
+    echo "Created ${MAGENTO_DIRECTORY}/var/report folder"
 fi
 
-if [ ! -d "frontend" ]
+if [ ! -d ${FRONTEND_DIRECTORY} ]
 then
-    mkdir frontend
-    echo "Created frontend folder"
+    mkdir ${FRONTEND_DIRECTORY}
+    echo "Created ${FRONTEND_DIRECTORY} folder"
 fi
