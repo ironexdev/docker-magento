@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. bin/docker/variables
+. bin/compose/variables
 
 # Build images
 docker-compose build "$@"

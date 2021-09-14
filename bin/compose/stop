@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. bin/docker/variables
+. bin/compose/variables
 
 # Stop running containers
 docker-compose down "$@"

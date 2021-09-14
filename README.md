@@ -81,7 +81,7 @@ __Currently supported versions of Magento__
 1) Add existing project
 	- Paste your existing Magento project to magento folder
 
-2) Run ```bin/docker/start```
+2) Run ```bin/compose/start```
 
 ### Create new Vue Storefront 2 project with Magento 2 GraphQL integration
 
@@ -130,21 +130,21 @@ Preferences - PHP - Servers
 
 ## Command Reference
 
-- ``` bin/docker/build ```
+- ``` bin/compose/build ```
 	- Build all images for services defined in docker-compose.yml file
 		- Accepts service name/s as argument/s in case you want to build one or more specific services
-- ``` bin/docker/cleanup ```
+- ``` bin/compose/cleanup ```
 	- Stop and remove all containers, images and volumes of the project
-- ``` bin/docker/restart ```
+- ``` bin/compose/restart ```
 	- Restart all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to restart one or more specific services
-- ``` bin/docker/start ```
+- ``` bin/compose/start ```
 	- Start all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to start one or more specific services
-- ``` bin/docker/stop ```
+- ``` bin/compose/stop ```
 	- Stop all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to stop one or more specific services
-- ``` bin/docker/variables ```
+- ``` bin/compose/variables ```
 	- This command is only used by other commands and it provides required variables for them, such as user and group id
 - ``` bin/helpers/create-bind-mounted-folders```
 	- Stops containers, checks if bind mounted folders specified in docker-compose.yml file exist and creates them if they don't
@@ -171,5 +171,5 @@ Preferences - PHP - Servers
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container
 - You might encounter permission issues if you manually delete one of bind mounted folders, because docker will automatically recreate them with root permissions, which means, that your containers won't have write access to them, because all containers are running in rootless mode.
-- If filebeat container stops with the error below, then remove the container (or run bin/docker/cleanup to remove all containers and images) and run bin/helpers/fix-filebeat-permissions and then bin/docker/start
+- If filebeat container stops with the error below, then remove the container (or run bin/compose/cleanup to remove all containers and images) and run bin/helpers/fix-filebeat-permissions and then bin/compose/start
   - ```Exiting: error loading config file: config file ("filebeat.yml") can only be writable by the owner but the permissions are "-rw-rw-r--" (to fix the permissions use: 'chmod go-w /usr/share/filebeat/filebeat.yml')```

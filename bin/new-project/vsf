@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. bin/docker/variables
+. bin/compose/variables
 
 # Remove Frontend folder
 bin/helpers/remove-frontend-folder
@@ -9,7 +9,7 @@ bin/helpers/remove-frontend-folder
 bin/helpers/create-bind-mounted-folders
 
 # Start containers
-bin/docker/start
+bin/compose/start
 
 # Init project
 docker-compose exec node sh -c "cd /home/node && \
