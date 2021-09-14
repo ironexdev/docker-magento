@@ -7,7 +7,7 @@ services:
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: .
-      dockerfile: ./docker/php-fpm/Dockerfile
+      dockerfile: ./images/php-fpm/Dockerfile
     command: sh -c "cd /home/dockeruser && chown $USER_ID:$GROUP_ID magento && php-fpm"
     container_name: docker-magento_php-fpm
     depends_on:
@@ -17,8 +17,8 @@ services:
       - internal
     volumes:
       - ./magento:/home/dockeruser/magento
-      - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
-      - ./docker/php-fpm/.composer:/home/dockeruser/.composer
+      - ./images/php-fpm/php.ini:/usr/local/etc/php/php.ini
+      - ./images/php-fpm/.composer:/home/dockeruser/.composer
 
   node:
     build:
@@ -26,7 +26,7 @@ services:
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: .
-      dockerfile: ./docker/node/Dockerfile
+      dockerfile: ./images/node/Dockerfile
     command: sh -c "cd /home/node && chown $USER_ID:$GROUP_ID frontend && tail -f /dev/null"
     container_name: docker-magento_node
     environment:
@@ -43,7 +43,7 @@ services:
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: .
-      dockerfile: ./docker/nginx/Dockerfile
+      dockerfile: ./images/nginx/Dockerfile
     command: sh -c "cd /home/dockeruser && chown $USER_ID:$GROUP_ID magento && nginx -g 'daemon off;'"
     container_name: docker-magento_nginx
     depends_on:
@@ -59,13 +59,13 @@ services:
       - 80:8080
     volumes:
       - ./magento:/home/dockeruser/magento
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./images/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - nginx_logs:/var/log/nginx
 
   mysql:
     build:
       context: .
-      dockerfile: ./docker/mysql/Dockerfile
+      dockerfile: ./images/mysql/Dockerfile
     container_name: docker-magento_mysql
     environment:
       MYSQL_DATABASE: "magento"
@@ -81,7 +81,7 @@ services:
   adminer:
     build:
       context: .
-      dockerfile: ./docker/adminer/Dockerfile
+      dockerfile: ./images/adminer/Dockerfile
     container_name: docker-magento_adminer
     depends_on:
       - mysql
@@ -95,7 +95,7 @@ services:
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: .
-      dockerfile: ./docker/elasticsearch/Dockerfile
+      dockerfile: ./images/elasticsearch/Dockerfile
     container_name: docker-magento_elasticsearch
     environment:
       ELASTIC_PASSWORD: changeme
@@ -104,12 +104,12 @@ services:
       - internal
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
-      - ./docker/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./images/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   logstash:
     build:
       context: .
-      dockerfile: ./docker/logstash/Dockerfile
+      dockerfile: ./images/logstash/Dockerfile
     container_name: docker-magento_logstash
     depends_on:
       - elasticsearch
@@ -118,20 +118,20 @@ services:
     networks:
       - internal
     volumes:
-      - ./docker/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - ./docker/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./images/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./images/logstash/pipeline:/usr/share/logstash/pipeline
 
   filebeat:
     build:
       context: .
-      dockerfile: ./docker/filebeat/Dockerfile
+      dockerfile: ./images/filebeat/Dockerfile
     container_name: docker-magento_filebeat
     depends_on:
       - logstash
     networks:
       - internal
     volumes:
-      - ./docker/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./images/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - nginx_logs:/var/log/nginx
       - ./magento/var/log:/var/log/magento
       - ./magento/var/report:/var/report/magento
@@ -139,7 +139,7 @@ services:
   kibana:
     build:
       context: .
-      dockerfile: ./docker/kibana/Dockerfile
+      dockerfile: ./images/kibana/Dockerfile
     container_name: docker-magento_kibana
     depends_on:
       - elasticsearch
@@ -148,12 +148,12 @@ services:
       - internal
     platform: linux/amd64
     volumes:
-      - ./docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - ./images/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   rabbitmq:
     build:
       context: .
-      dockerfile: ./docker/rabbitmq/Dockerfile
+      dockerfile: ./images/rabbitmq/Dockerfile
     container_name: docker-magento_rabbitmq
     networks:
       - external
@@ -162,7 +162,7 @@ services:
   redis:
     build:
       context: .
-      dockerfile: ./docker/redis/Dockerfile
+      dockerfile: ./images/redis/Dockerfile
     container_name: docker-magento_redis
     networks:
       - internal
@@ -170,7 +170,7 @@ services:
   redis-admin:
     build:
       context: .
-      dockerfile: ./docker/redis-admin/Dockerfile
+      dockerfile: ./images/redis-admin/Dockerfile
     container_name: docker-magento_redis-admin
     depends_on:
       - redis
@@ -183,7 +183,7 @@ services:
   mailhog:
     build:
       context: .
-      dockerfile: ./docker/mailhog/Dockerfile
+      dockerfile: ./images/mailhog/Dockerfile
     container_name: docker-magento_mailhog
     networks:
       - internal

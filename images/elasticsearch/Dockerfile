@@ -11,6 +11,6 @@ FROM elasticsearch:7.12.1
 #            -e "s/chown -R 1000/chown -R $USER_ID/" /usr/local/bin/docker-entrypoint.sh
 # RUN chown elasticsearch /usr/local/bin/docker-entrypoint.sh
 
-COPY --chown=elasticsearch:elasticsearch ./docker/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
+COPY --chown=elasticsearch:elasticsearch ./images/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 
 USER elasticsearch

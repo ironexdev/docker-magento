@@ -1,4 +1,4 @@
-docker/php-fpm/.composer/*
+images/php-fpm/.composer/*
 frontend/*
 magento/*
 .idea

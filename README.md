@@ -25,8 +25,9 @@ __Currently supported versions of Magento__
 
 ### Requirements and Prerequsites
 
+- Tested on MacOS (M1) and Linux, does not work on Windows
 - Have at least 16 GB RAM on your host system
-- (MacOS, Windows) Allocate at least 5 GB RAM to Docker Desktop
+- (MacOS) Allocate at least 5 GB RAM to Docker Desktop
 - Install Docker and docker-compose
 - (Windows) Install Git bash and use it to run project shell commands located in bin folder
 - Add following to etc/hosts
@@ -43,7 +44,7 @@ __Currently supported versions of Magento__
 	- This will install new Magento project to "magento" folder
 		- Magento 2 documentation https://devdocs.magento.com
 	- Requires Magento version as an argument
-	- Keys can be found in https://marketplace.magento.com/customer/accessKeys/ and you can opt-in to store your keys (login and password) to /home/docker/.composer/auth.json, which is bind mounted to docker/php-fpm/auth.json
+	- Keys can be found in https://marketplace.magento.com/customer/accessKeys/ and you can opt-in to store your keys (login and password) to /home/dockeruser/.composer/auth.json, which is bind mounted to images/php-fpm/auth.json
 	- Magento default settings - these can be edited in bin/new-project/magento
 		- ```base-url=http://magento.local```
 		- ```db-host=mysql```

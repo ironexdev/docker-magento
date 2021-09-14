@@ -37,7 +37,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-3.0.4 \
     && docker-php-ext-enable xdebug
 
-COPY ./docker/php-fpm/php.ini /usr/local/etc/php/php.ini
+COPY ./images/php-fpm/php.ini /usr/local/etc/php/php.ini
 
 # Composer
 RUN apk add composer

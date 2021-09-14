@@ -3,7 +3,7 @@
 . bin/docker/variables
 
 # Stop running containers and remove images (-v parameter can be added to also remove volumes)
-sh bin/docker/stop --rmi all "$@"
+bin/docker/stop --rmi all "$@"
 
 # Remove stopped containers
 docker-compose rm
