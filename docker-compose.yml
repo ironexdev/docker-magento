@@ -4,7 +4,6 @@ services:
   php-fpm:
     build:
       args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: $APP_DIRECTORY
@@ -24,7 +23,6 @@ services:
   node:
     build:
       args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: $APP_DIRECTORY
@@ -82,8 +80,6 @@ services:
 
   adminer:
     build:
-      args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/adminer/Dockerfile
     container_name: docker-magento_adminer
@@ -96,7 +92,6 @@ services:
   elasticsearch:
     build:
       args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: $APP_DIRECTORY
@@ -113,8 +108,6 @@ services:
 
   logstash:
     build:
-      args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/logstash/Dockerfile
     container_name: docker-magento_logstash
@@ -130,8 +123,6 @@ services:
 
   filebeat:
     build:
-      args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/filebeat/Dockerfile
     container_name: docker-magento_filebeat
@@ -147,8 +138,6 @@ services:
 
   kibana:
     build:
-      args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/kibana/Dockerfile
     container_name: docker-magento_kibana
@@ -163,8 +152,6 @@ services:
 
   rabbitmq:
     build:
-      args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/rabbitmq/Dockerfile
     container_name: docker-magento_rabbitmq
@@ -174,8 +161,6 @@ services:
 
   redis:
     build:
-      args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/redis/Dockerfile
     container_name: docker-magento_redis
@@ -184,8 +169,6 @@ services:
 
   redis-admin:
     build:
-      args:
-        DOCKER_DIRECTORY: $DOCKER_DIRECTORY
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/redis-admin/Dockerfile
     container_name: docker-magento_redis-admin
