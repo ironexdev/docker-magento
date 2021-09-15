@@ -81,7 +81,7 @@ __Currently supported versions of Magento__
 1) Add existing project
 	- Paste your existing Magento project to magento folder
 
-2) Run ```bin/compose/start```
+2) Run ```bin/compose/up```
 
 ### Create new Vue Storefront 2 project with Magento 2 GraphQL integration
 
@@ -138,10 +138,10 @@ Preferences - PHP - Servers
 - ``` bin/compose/restart ```
 	- Restart all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to restart one or more specific services
-- ``` bin/compose/start ```
+- ``` bin/compose/up ```
 	- Start all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to start one or more specific services
-- ``` bin/compose/stop ```
+- ``` bin/compose/down ```
 	- Stop all services (containers) defined within docker-compose file
 		- Accepts service name/s as argument/s in case you want to stop one or more specific services
 - ``` bin/compose/variables ```
@@ -171,5 +171,5 @@ Preferences - PHP - Servers
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container
 - You might encounter permission issues if you manually delete one of bind mounted folders, because docker will automatically recreate them with root permissions, which means, that your containers won't have write access to them, because all containers are running in rootless mode.
-- If filebeat container stops with the error below, then remove the container (or run bin/compose/cleanup to remove all containers and images) and run bin/helpers/fix-filebeat-permissions and then bin/compose/start
+- If filebeat container stops with the error below, then remove the container (or run bin/compose/cleanup to remove all containers and images) and run bin/helpers/fix-filebeat-permissions and then bin/compose/up
   - ```Exiting: error loading config file: config file ("filebeat.yml") can only be writable by the owner but the permissions are "-rw-rw-r--" (to fix the permissions use: 'chmod go-w /usr/share/filebeat/filebeat.yml')```

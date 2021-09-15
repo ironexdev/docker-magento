@@ -5,6 +5,6 @@
 echo "Stopping running containers"
 
 # If containers with bind mounted folders are running, then deleted folders will be immediatelly re-created by Docker with root permissions
-${DOCKER_DIRECTORY}/bin/compose/stop
+${DOCKER_BIN_DIRECTORY}/compose/down
 
 rm -rf ${MAGENTO_DIRECTORY}

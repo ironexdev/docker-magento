@@ -18,12 +18,12 @@ while true; do
 done
 
 # Remove Magento folder
-${DOCKER_DIRECTORY}/bin/helpers/remove-magento-folder
+${DOCKER_BIN_DIRECTORY}/helpers/remove-magento-folder
 
 # Create bind mounted folders
-${DOCKER_DIRECTORY}/bin/helpers/create-bind-mounted-folders
+${DOCKER_BIN_DIRECTORY}/helpers/create-bind-mounted-folders
 # Start containers
-${DOCKER_DIRECTORY}/bin/compose/start
+${DOCKER_BIN_DIRECTORY}/compose/up
 
 cd ${DOCKER_DIRECTORY}
 
@@ -70,18 +70,18 @@ docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:instal
 cd ${APP_DIRECTORY}
 
 # Set developer mode
-${DOCKER_DIRECTORY}/bin/magento deploy:mode:set developer
+${DOCKER_BIN_DIRECTORY}/magento deploy:mode:set developer
 
 # Two factor authentication is enabled by default since version 2.4.0
-${DOCKER_DIRECTORY}/bin/magento module:disable Magento_TwoFactorAuth
+${DOCKER_BIN_DIRECTORY}/magento module:disable Magento_TwoFactorAuth
 
 # Set SMTP host
-${DOCKER_DIRECTORY}/bin/magento config:set system/smtp/host mailhog
+${DOCKER_BIN_DIRECTORY}/magento config:set system/smtp/host mailhog
 # Set SMTP port
-${DOCKER_DIRECTORY}/bin/magento config:set system/smtp/port 1025
+${DOCKER_BIN_DIRECTORY}/magento config:set system/smtp/port 1025
 echo "Mailhog has been configured."
 
-${DOCKER_DIRECTORY}/bin/magento config:set admin/security/use_form_key 0
+${DOCKER_BIN_DIRECTORY}/magento config:set admin/security/use_form_key 0
 echo "Secret key in admin urls was disabled."
 
-${DOCKER_DIRECTORY}/bin/magento cache:flush
+${DOCKER_BIN_DIRECTORY}/magento cache:flush

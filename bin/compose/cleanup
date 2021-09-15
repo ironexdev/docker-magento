@@ -3,7 +3,7 @@
 . bin/variables
 
 # Stop running containers and remove images (-v parameter can be added to also remove volumes)
-${DOCKER_DIRECTORY}/bin/compose/stop --rmi all "$@"
+${DOCKER_BIN_DIRECTORY}/compose/down --rmi all "$@"
 
 cd ${DOCKER_DIRECTORY}
 

@@ -5,6 +5,7 @@ export GROUP_ID=$(id -u)
 
 export APP_DIRECTORY=$(pwd)
 
+export DOCKER_BIN_DIRECTORY=${APP_DIRECTORY}/bin
 export DOCKER_DIRECTORY=${APP_DIRECTORY}
 export DOCKER_IMAGE_FOLDER="images" # used in Dockerfiles as relative path to the context (APP_DIRECTORY)
 

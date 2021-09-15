@@ -3,13 +3,13 @@
 . bin/variables
 
 # Remove Frontend folder
-${DOCKER_DIRECTORY}/bin/helpers/remove-frontend-folder
+${DOCKER_BIN_DIRECTORY}/helpers/remove-frontend-folder
 
 # Create bind mounted folders
-${DOCKER_DIRECTORY}/bin/helpers/create-bind-mounted-folders
+${DOCKER_BIN_DIRECTORY}/helpers/create-bind-mounted-folders
 
 # Start containers
-${DOCKER_DIRECTORY}/bin/compose/start
+${DOCKER_BIN_DIRECTORY}/compose/up
 
 cd ${DOCKER_DIRECTORY}
 
