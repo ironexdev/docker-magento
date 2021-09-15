@@ -2,8 +2,8 @@
 
 . bin/variables
 
-# Remove Frontend folder
-${DOCKER_BIN_DIRECTORY}/helpers/remove-frontend-folder
+# Remove Nuxt folder
+${DOCKER_BIN_DIRECTORY}/helpers/remove-nuxt-folder
 
 # Create bind mounted folders
 ${DOCKER_BIN_DIRECTORY}/helpers/create-bind-mounted-folders
@@ -18,8 +18,8 @@ docker-compose exec node sh -c "cd /home/node && \
 if [ -d temp ]; then rm -rf temp; fi && \
 mkdir temp && \
 cd temp && \
-yarn create nuxt-app frontend && \
-mv /home/node/temp/frontend/* /home/node/frontend && \
+yarn create nuxt-app nuxt && \
+mv /home/node/temp/nuxt/* /home/node/nuxt && \
 rm -rf /home/node/temp"
 
 cd ${APP_DIRECTORY}

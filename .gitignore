@@ -1,5 +1,5 @@
 images/php-fpm/.composer/*
-frontend/*
+nuxt/*
 magento/*
 .idea
 .DS_Store

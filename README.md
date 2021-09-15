@@ -32,7 +32,7 @@ __Currently supported versions of Magento__
 - (Windows) Install Git bash and use it to run project shell commands located in bin folder
 - Add following to etc/hosts
 	- 127.0.0.1	magento.local
-	- 127.0.0.1 frontend.magento.local
+	- 127.0.0.1 nuxt.magento.local
 	- 127.0.0.1	kibana.magento.local
 	- 127.0.0.1	redis.magento.local
 	- 127.0.0.1	rabbitmq.magento.local
@@ -87,7 +87,7 @@ __Currently supported versions of Magento__
 
 1) Run ```bin/new-project/vsf```
  	- Select Magento 2 integration
-	- Running this command will install Vue Storefront 2 project to frontend folder and start development server on http://frontend.magento.local
+	- Running this command will install Vue Storefront 2 project to nuxt folder and start development server on http://nuxt.magento.local
 		- You can start VSF 2 with ```bin/node yarn dev```
 		- VSF 2 documentation https://docs.vuestorefront.io/v2/
 
@@ -148,14 +148,14 @@ Preferences - PHP - Servers
 	- This command is only used by other commands and it provides required variables for them, such as user and group id
 - ``` bin/helpers/create-bind-mounted-folders```
 	- Stops containers, checks if bind mounted folders specified in docker-compose.yml file exist and creates them if they don't
-- ``` bin/helpers/remove-frontend-folder ```
-	- Stops containers and removes frontend folder
+- ``` bin/helpers/remove-nuxt-folder ```
+	- Stops containers and removes nuxt folder
 - ``` bin/helpers/remove-magento-folder ```
 	- Stops containers and removes Magento folder
 - ``` bin/new-project/magento ```
 	- Creates new Magento project in Magento folder
 - ``` bin/new-project/vsf ```
-	- Creates new VSF 2 project in frontend folder
+	- Creates new VSF 2 project in nuxt folder
 - ``` bin/composer ```
 	- Runs Composer command in magento folder within php-fpm container
 - ``` bin/magento ```
