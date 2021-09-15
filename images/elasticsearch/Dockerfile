@@ -1,5 +1,7 @@
 FROM elasticsearch:7.12.1
 
+ARG DOCKER_IMAGE_FOLDER
+
 # ARG GROUP_ID
 # ARG USER_ID
 #
@@ -11,8 +13,6 @@ FROM elasticsearch:7.12.1
 #            -e "s/chown -R 1000/chown -R $USER_ID/" /usr/local/bin/compose-entrypoint.sh
 # RUN chown elasticsearch /usr/local/bin/compose-entrypoint.sh
 
-COPY --chown=elasticsearch:elasticsearch docker/images/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
+COPY --chown=elasticsearch:elasticsearch $DOCKER_IMAGE_FOLDER/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 
 USER elasticsearch
-
-WORKDIR /home/elasticsearch

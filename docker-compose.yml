@@ -4,6 +4,7 @@ services:
   php-fpm:
     build:
       args:
+        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: $APP_DIRECTORY
@@ -92,6 +93,7 @@ services:
   elasticsearch:
     build:
       args:
+        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
         GROUP_ID: $GROUP_ID
         USER_ID: $USER_ID
       context: $APP_DIRECTORY
@@ -108,6 +110,8 @@ services:
 
   logstash:
     build:
+      args:
+        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/logstash/Dockerfile
     container_name: docker-magento_logstash
@@ -123,6 +127,8 @@ services:
 
   filebeat:
     build:
+      args:
+        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/filebeat/Dockerfile
     container_name: docker-magento_filebeat
@@ -138,6 +144,8 @@ services:
 
   kibana:
     build:
+      args:
+        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/kibana/Dockerfile
     container_name: docker-magento_kibana

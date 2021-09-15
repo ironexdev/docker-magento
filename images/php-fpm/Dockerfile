@@ -1,5 +1,6 @@
 FROM php:7.4.19-fpm-alpine
 
+ARG DOCKER_IMAGE_FOLDER
 ARG GROUP_ID
 ARG USER_ID
 
@@ -37,7 +38,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-3.0.4 \
     && docker-php-ext-enable xdebug
 
-COPY docker/images/php-fpm/php.ini /usr/local/etc/php/php.ini
+COPY $DOCKER_IMAGE_FOLDER/php-fpm/php.ini /usr/local/etc/php/php.ini
 
 # Composer
 RUN apk add composer

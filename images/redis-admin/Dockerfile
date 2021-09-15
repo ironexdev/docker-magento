@@ -6,8 +6,6 @@ RUN chmod 770 /src
 
 USER www-data
 
-WORKDIR /home/www-data
-
 EXPOSE 8080
 
 ENTRYPOINT ["tini","--","php","-S","0.0.0.0:8080"]
