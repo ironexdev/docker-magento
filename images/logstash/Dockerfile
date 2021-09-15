@@ -8,4 +8,4 @@ COPY --chown=logstash:logstash $DOCKER_IMAGE_FOLDER/logstash/pipeline/logstash.c
 
 COPY --chown=logstash:logstash $DOCKER_IMAGE_FOLDER/logstash/logstash.yml /usr/share/logstash/config/logstash.yml
 
-USER logstashw
+USER logstash
