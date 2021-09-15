@@ -15,6 +15,8 @@ RUN find / -user $USER_ID -exec chown -h node {} \;
 
 RUN apk add --no-cache git
 
+RUN yarn global add @vue/cli
+
 RUN yarn global add @vue-storefront/cli
 
 RUN apk add --no-cache git
