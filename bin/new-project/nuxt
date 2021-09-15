@@ -18,11 +18,8 @@ docker-compose exec node sh -c "cd /home/node && \
 if [ -d temp ]; then rm -rf temp; fi && \
 mkdir temp && \
 cd temp && \
-vsf init frontend && \
+yarn create nuxt-app frontend && \
 mv /home/node/temp/frontend/* /home/node/frontend && \
-rm -rf /home/node/temp && \
-cd /home/node/frontend && \
-yarn install && \
-yarn dev"
+rm -rf /home/node/temp"
 
 cd ${APP_DIRECTORY}
