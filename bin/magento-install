@@ -52,3 +52,20 @@ docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:instal
 --cleanup-database
 
 cd ${APP_DIRECTORY}
+
+# Set developer mode
+${DOCKER_BIN_DIRECTORY}/magento deploy:mode:set developer
+
+# Two factor authentication is enabled by default since version 2.4.0
+${DOCKER_BIN_DIRECTORY}/magento module:disable Magento_TwoFactorAuth
+
+# Set SMTP host
+${DOCKER_BIN_DIRECTORY}/magento config:set system/smtp/host mailhog
+# Set SMTP port
+${DOCKER_BIN_DIRECTORY}/magento config:set system/smtp/port 1025
+echo "Mailhog has been configured."
+
+${DOCKER_BIN_DIRECTORY}/magento config:set admin/security/use_form_key 0
+echo "Secret key in admin urls was disabled."
+
+${DOCKER_BIN_DIRECTORY}/magento cache:flush
