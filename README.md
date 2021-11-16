@@ -126,7 +126,7 @@ Preferences - PHP - Debug
 
 Preferences - PHP - Servers
 
-<img src="https://ibb.co/rHLMWrc" alt="Preferences - PHP - Servers" width="250px">
+<img src="https://i.ibb.co/RcMP5wB/image.png" alt="Preferences - PHP - Servers" width="250px">
 
 ## Command Reference
 
