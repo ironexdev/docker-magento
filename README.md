@@ -126,7 +126,7 @@ Preferences - PHP - Debug
 
 Preferences - PHP - Servers
 
-<img src="https://i.ibb.co/GVqfVs5/phpstorm.jpg" alt="Preferences - PHP - Servers" width="250px">
+<img src="https://ibb.co/rHLMWrc" alt="Preferences - PHP - Servers" width="250px">
 
 ## Command Reference
 
