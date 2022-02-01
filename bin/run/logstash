@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Logstash service (container)
+docker-compose exec logstash "$@"
+
+cd ${APP_DIRECTORY}

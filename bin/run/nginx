@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Nginx service (container)
+docker-compose exec nginx "$@"
+
+cd ${APP_DIRECTORY}

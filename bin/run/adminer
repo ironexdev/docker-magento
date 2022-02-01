@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Adminer service (container)
+docker-compose exec adminer "$@"
+
+cd ${APP_DIRECTORY}

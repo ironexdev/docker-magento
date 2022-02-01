@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Redis Admin service (container)
+docker-compose exec redis-admin "$@"
+
+cd ${APP_DIRECTORY}

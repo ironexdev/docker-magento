@@ -116,7 +116,7 @@ Kibana should now be configured to display 5 types of logs: nginx error log (```
 
 ### Configure Xdebug
 
-1) Run ```bin/ide/xdebug debug```
+1) Run ```bin/xdebug/mode debug```
 	- You can turn off Xdebug by running ```bin/ide/xdebug off``` and turn it on again with ```bin/ide/xdebug debug```, you can also use this command to set all other Xdebug modes (https://xdebug.org/docs/all_settings#mode)
 2) PhpStorm should offer you automatic setup after you add breakpoint and make http request (open magento.local in a browser) and correct settings should be similar to this:
 
@@ -128,45 +128,58 @@ Preferences - PHP - Servers
 
 <img src="https://i.ibb.co/bPK0LYq/phpstorm.png" alt="Preferences - PHP - Servers" width="250px">
 
+### Xdebug CLI
+
+1) Add breakpoints (via IDE)
+
+2) RUN ```bin/xdebug/cli <FILE_PATH> <SERVER_NAME=magento.local>```
+   - It is relative to magento folder, run ```bin/xdebug/cli pub/index.php``` to debug ```magento/pub/index.php``` 
+   - SERVER_NAME is optional
+
 ## Command Reference
 
 - ``` bin/compose/build ```
-	- Build all images for services defined in docker-compose.yml file
-		- Accepts service name/s as argument/s in case you want to build one or more specific services
+    - Build all images for services defined in docker-compose.yml file
+        - Accepts service name/s as argument/s in case you want to build one or more specific services
 - ``` bin/compose/cleanup ```
-	- Stop and remove all containers, images and volumes of the project
+    - Stop and remove all containers, images and volumes of the project
 - ``` bin/compose/restart ```
-	- Restart all services (containers) defined within docker-compose file
-		- Accepts service name/s as argument/s in case you want to restart one or more specific services
+    - Restart all services (containers) defined within docker-compose file
+        - Accepts service name/s as argument/s in case you want to restart one or more specific services
 - ``` bin/compose/up ```
-	- Start all services (containers) defined within docker-compose file
-		- Accepts service name/s as argument/s in case you want to start one or more specific services
+    - Start all services (containers) defined within docker-compose file
+        - Accepts service name/s as argument/s in case you want to start one or more specific services
 - ``` bin/compose/down ```
-	- Stop all services (containers) defined within docker-compose file
-		- Accepts service name/s as argument/s in case you want to stop one or more specific services
+    - Stop all services (containers) defined within docker-compose file
+        - Accepts service name/s as argument/s in case you want to stop one or more specific services
 - ``` bin/compose/variables ```
-	- This command is only used by other commands and it provides required variables for them, such as user and group id
+    - This command is only used by other commands and it provides required variables for them, such as user and group id
 - ``` bin/helpers/create-bind-mounted-folders```
-	- Stops containers, checks if bind mounted folders specified in docker-compose.yml file exist and creates them if they don't
+    - Stops containers, checks if bind mounted folders specified in docker-compose.yml file exist and creates them if they don't
 - ``` bin/helpers/remove-nuxt-folder ```
-	- Stops containers and removes nuxt folder
+    - Stops containers and removes nuxt folder
 - ``` bin/helpers/remove-magento-folder ```
-	- Stops containers and removes Magento folder
+    - Stops containers and removes Magento folder
 - ``` bin/new-project/magento ```
-	- Creates new Magento project in Magento folder
+    - Creates new Magento project in Magento folder
 - ``` bin/new-project/vsf ```
-	- Creates new VSF 2 project in nuxt folder
+    - Creates new VSF 2 project in nuxt folder
 - ``` bin/composer ```
-	- Runs Composer command in magento folder within php-fpm container
+    - Runs Composer command in magento folder within php-fpm container
 - ``` bin/magento ```
-	- Runs magento command in magento folder within php-fpm containe
-- ``` bin/mysql ```
-	- Runs mysql command within mysql container
-- ``` bin/node ```
-	- Runs supplied command within node container
-- ``` bin/xdebug ```
-	- Sets xdebug.mode to php.ini within php-fpm container and restarts it
-
+    - Runs magento command in magento folder within php-fpm containe
+- ``` bin/mysql $@ ```
+    - Runs mysql command within mysql container
+- ``` bin/node $@ ```
+    - Runs supplied command within node container
+- ```bin/run/<service name> $@```
+    - Runs supplied command within specified container (service)
+- ``` bin/xdebug/mode <MODE> ```
+    - Sets xdebug.mode to php.ini within php-fpm container and restarts it
+- ``` bin/xdebug/cli<FILE_PATH> <SERVER_NAME=magento.local> ```
+    - Runs specified script (FILE_PATH) and then stops at defined breakpoint (via IDE) 
+    - It is relative to magento folder, run ```bin/xdebug/cli pub/index.php``` to debug ```magento/pub/index.php``` 
+    - SERVER_NAME is optional
 ## Troubleshooting
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container

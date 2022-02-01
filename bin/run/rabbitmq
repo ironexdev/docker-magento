@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Rabbitmq service (container)
+docker-compose exec rabbitmq "$@"
+
+cd ${APP_DIRECTORY}

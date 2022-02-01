@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in PHP-FPM service (container)
+docker-compose exec php-fpm "$@"
+
+cd ${APP_DIRECTORY}

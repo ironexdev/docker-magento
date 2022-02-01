@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Kibana service (container)
+docker-compose exec kibana "$@"
+
+cd ${APP_DIRECTORY}

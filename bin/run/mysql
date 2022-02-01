@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Mysql service (container)
+docker-compose exec mysql "$@"
+
+cd ${APP_DIRECTORY}

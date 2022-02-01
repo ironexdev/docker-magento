@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. bin/variables
+
+cd ${DOCKER_DIRECTORY}
+
+# Run command in Elasticsearch service (container)
+docker-compose exec elasticsearch "$@"
+
+cd ${APP_DIRECTORY}
