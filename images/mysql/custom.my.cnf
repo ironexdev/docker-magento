@@ -1,0 +1,3 @@
+[mysqld]
+# solves General error: 1419
+log_bin_trust_function_creators = 1
