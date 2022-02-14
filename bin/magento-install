@@ -14,6 +14,12 @@ while true; do
     esac
 done
 
+# Run pre install script, if exists
+if [ -f "$APP_DIRECTORY/scripts/magento-pre-install" ]
+then
+    $APP_DIRECTORY/scripts/magento-pre-install
+fi
+
 # Install Magento
 docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:install \
 --base-url=http://magento.local \
@@ -50,6 +56,13 @@ docker-compose exec -T php-fpm /home/dockeruser/magento/bin/magento setup:instal
 --amqp-password="guest" \
 --amqp-virtualhost="/" \
 --cleanup-database
+
+# Run post install script, if exists
+if [ -f "$APP_DIRECTORY/scripts/magento-post-install" ]
+then
+    $APP_DIRECTORY/scripts/magento-post-install
+fi
+
 
 cd ${APP_DIRECTORY}
 
