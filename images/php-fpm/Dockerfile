@@ -4,6 +4,10 @@ ARG DOCKER_IMAGE_FOLDER
 ARG GROUP_ID
 ARG USER_ID
 
+# iconv fix (https://github.com/docker-library/php/issues/240#issuecomment-763112749)
+RUN apk add --upgrade gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
+
 # php gd dependencies
 RUN apk add zlib-dev
 RUN apk add jpeg-dev
