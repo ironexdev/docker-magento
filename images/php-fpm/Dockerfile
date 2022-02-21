@@ -44,6 +44,9 @@ RUN apk add --no-cache $PHPIZE_DEPS \
 
 COPY $DOCKER_IMAGE_FOLDER/php-fpm/php.ini /usr/local/etc/php/php.ini
 
+# Git
+RUN apk add git
+
 # Composer
 RUN apk add composer
 
