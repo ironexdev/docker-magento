@@ -22,7 +22,6 @@ services:
       - $DOCKER_DIRECTORY/images/php-fpm/.composer:/home/dockeruser/.composer
 
   node:
-    hostname: node
     build:
       args:
         GROUP_ID: $GROUP_ID
@@ -192,7 +191,6 @@ services:
       - internal
 
   mailhog:
-    hostname: mailhog
     build:
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/mailhog/Dockerfile
