@@ -22,6 +22,7 @@ services:
       - $DOCKER_DIRECTORY/images/php-fpm/.composer:/home/dockeruser/.composer
 
   node:
+    hostname: node
     build:
       args:
         GROUP_ID: $GROUP_ID
@@ -54,6 +55,7 @@ services:
       - kibana
       - rabbitmq
       - redis-admin
+      - mailhog
     networks:
       - external
     ports:
@@ -190,12 +192,14 @@ services:
       - internal
 
   mailhog:
+    hostname: mailhog
     build:
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/mailhog/Dockerfile
     container_name: docker-magento_mailhog
     networks:
       - internal
+      - external
 
 networks:
   internal:
