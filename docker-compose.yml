@@ -54,6 +54,7 @@ services:
       - kibana
       - rabbitmq
       - redis-admin
+      - mailhog
     networks:
       - external
     ports:
@@ -196,6 +197,7 @@ services:
     container_name: docker-magento_mailhog
     networks:
       - internal
+      - external
 
 networks:
   internal:
