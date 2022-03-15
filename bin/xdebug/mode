@@ -31,9 +31,9 @@ cd ${DOCKER_DIRECTORY}
 
 if [ $(uname) = "Darwin" ]
 then
-  docker-compose exec -u root php-fpm sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" /usr/local/etc/php/php.ini
+  docker-compose exec php-fpm sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" /usr/local/etc/php/php.ini
 else
-  docker-compose exec -u root php-fpm sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" /usr/local/etc/php/php.ini
+  docker-compose exec php-fpm sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" /usr/local/etc/php/php.ini
 fi
 
 echo "reloading php-fpm configuration"
