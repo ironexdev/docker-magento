@@ -42,7 +42,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-3.0.4 \
     && docker-php-ext-enable xdebug
 
-COPY --chown $DOCKER_IMAGE_FOLDER/php-fpm/php.ini /usr/local/etc/php/php.ini
+COPY $DOCKER_IMAGE_FOLDER/php-fpm/php.ini /usr/local/etc/php/php.ini
 
 # Git
 RUN apk add git
@@ -54,9 +54,10 @@ RUN addgroup -g $GROUP_ID -S dockeruser
 
 RUN adduser -S -G dockeruser -u $USER_ID -s /bin/ash dockeruser
 
-USER dockeruser
+RUN chown dockeruser /usr/local/etc/php/php.ini
+RUN chmod 0777 /usr/local/etc/php
 
-RUN chwon dockeruser /usr/local/etc/php/php.ini
+USER dockeruser
 
 WORKDIR /home/dockeruser/magento
 
