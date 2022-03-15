@@ -11,4 +11,4 @@ export DOCKER_IMAGE_FOLDER="images" # used in Dockerfiles as relative path to th
 
 export MAGENTO_DIRECTORY=${APP_DIRECTORY}/magento
 
-export NUXT_DIRECTORY=${APP_DIRECTORY}/nuxt
+export FRONTEND_DIRECTORY=${APP_DIRECTORY}/frontend
