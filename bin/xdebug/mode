@@ -29,7 +29,7 @@
 
 cd ${DOCKER_DIRECTORY}
 
-if [ $(uname) == "Darwin" ]
+if [ $(uname) = "Darwin" ]
 then
   docker-compose exec -u root php-fpm sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" /usr/local/etc/php/php.ini
 else
