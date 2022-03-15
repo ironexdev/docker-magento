@@ -9,6 +9,6 @@ then echo "First argument has to be relative path (<FILE_PATH>) to target file";
   exit;
 fi
 
-docker-compose exec -e XDEBUG_SESSION=1 -e PHP_IDE_CONFIG="serverName=$CLI_XDEBUG_SERVER_NAME"  php-fpm "$@"
+docker-compose exec -e XDEBUG_SESSION=1 -e PHP_IDE_CONFIG="serverName=$CLI_XDEBUG_SERVER_NAME" php-fpm "$@"
 
 cd ${APP_DIRECTORY}
