@@ -56,6 +56,6 @@ RUN adduser -S -G dockeruser -u $USER_ID -s /bin/ash dockeruser
 
 USER dockeruser
 
-WORKDIR /home/dockeruser
+WORKDIR /home/dockeruser/magento
 
 EXPOSE 9000
