@@ -5,19 +5,10 @@
 cd ${DOCKER_DIRECTORY}
 
 if [ -z $1 ]
-then echo "First argument has to be relative path (magento/<FILE_PATH>) to target file";
+then echo "First argument has to be relative path (<FILE_PATH>) to target file";
   exit;
-else
-  FILE_PATH=$1
 fi
 
-if [ -z $2 ]
-then
-  SERVER_NAME="magento.local"
-else
-  SERVER_NAME=$2
-fi
-
-bin/run/php-fpm sh -c "export XDEBUG_SESSION=1 && export PHP_IDE_CONFIG=\"serverName=$SERVER_NAME\" && php magento/$FILE_PATH"
+docker-compose exec -e XDEBUG_SESSION=1 -e PHP_IDE_CONFIG="serverName=$CLI_XDEBUG_SERVER_NAME"  php-fpm "$@"
 
 cd ${APP_DIRECTORY}
