@@ -20,7 +20,7 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - $MAGENTO_DIRECTORY:/home/dockeruser/magento
-      - $DOCKER_DIRECTORY/images/php-fpm/php.ini:/usr/local/etc/php/php.ini
+      - $DOCKER_DIRECTORY/images/php-fpm/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
       - $DOCKER_DIRECTORY/images/php-fpm/.composer:/home/dockeruser/.composer
 
   node:

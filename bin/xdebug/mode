@@ -27,15 +27,16 @@
 # trace
 # - Enables the Function Trace feature, which allows you record every function call, including arguments, variable assignment, and return value that is made during a request to a file.
 
-if [ $(uname) == "Darwin" ]
-then
-    sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" ${DOCKER_DIRECTORY}/images/php-fpm/php.ini
-else
-  sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" ${DOCKER_DIRECTORY}/images/php-fpm/php.ini
-fi
-
 cd ${DOCKER_DIRECTORY}
 
-docker-compose restart php-fpm
+if [ $(uname) == "Darwin" ]
+then
+  docker-compose exec -u root php-fpm sed -i '' "s/xdebug.mode=.*/xdebug.mode=$1/g" /usr/local/etc/php/php.ini
+else
+  docker-compose exec -u root php-fpm sed -i "s/xdebug.mode=.*/xdebug.mode=$1/g" /usr/local/etc/php/php.ini
+fi
+
+echo "reloading php-fpm configuration"
+docker-compose exec php-fpm kill -USR2 1
 
 cd ${APP_DIRECTORY}
