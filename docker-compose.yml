@@ -16,9 +16,11 @@ services:
     networks:
       - external
       - internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - $MAGENTO_DIRECTORY:/home/dockeruser/magento
-      - $DOCKER_DIRECTORY/images/php-fpm/php.ini:/usr/local/etc/php/php.ini
+      - $DOCKER_DIRECTORY/images/php-fpm/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
       - $DOCKER_DIRECTORY/images/php-fpm/.composer:/home/dockeruser/.composer
 
   node:
@@ -54,6 +56,7 @@ services:
       - kibana
       - rabbitmq
       - redis-admin
+      - mailhog
     networks:
       - external
     ports:
@@ -196,6 +199,7 @@ services:
     container_name: docker-magento_mailhog
     networks:
       - internal
+      - external
 
 networks:
   internal:

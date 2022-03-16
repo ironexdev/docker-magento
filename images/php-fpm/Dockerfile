@@ -54,8 +54,10 @@ RUN addgroup -g $GROUP_ID -S dockeruser
 
 RUN adduser -S -G dockeruser -u $USER_ID -s /bin/ash dockeruser
 
+RUN chown -R dockeruser: /usr/local/etc/php
+
 USER dockeruser
 
-WORKDIR /home/dockeruser
+WORKDIR /home/dockeruser/magento
 
 EXPOSE 9000
