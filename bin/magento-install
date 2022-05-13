@@ -71,8 +71,12 @@ ${DOCKER_BIN_DIRECTORY}/magento deploy:mode:set developer
 # Two factor authentication is enabled by default since version 2.4.0
 ${DOCKER_BIN_DIRECTORY}/magento module:disable Magento_TwoFactorAuth
 
+# Set session admin lifetime for one year
+${DOCKER_BIN_DIRECTORY}/magento config:set admin/security/session_lifetime 31535999
+
 # Set SMTP host
 ${DOCKER_BIN_DIRECTORY}/magento config:set system/smtp/host mailhog
+
 # Set SMTP port
 ${DOCKER_BIN_DIRECTORY}/magento config:set system/smtp/port 1025
 echo "Mailhog has been configured."
