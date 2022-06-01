@@ -12,10 +12,7 @@ Includes optional integration with Vue Storefront 2
 ```Redis```,
 ```Redis Admin```,
 ```RabbitMQ```,
-```Filebeat```,
 ```Elastic Search```,
-```Logstash```,
-```Kibana```
 
 __Currently supported versions of Magento__
 
@@ -33,7 +30,6 @@ __Currently supported versions of Magento__
 - Add following to etc/hosts
 	- 127.0.0.1	magento.local
 	- 127.0.0.1 nuxt.magento.local
-	- 127.0.0.1	kibana.magento.local
 	- 127.0.0.1	redis.magento.local
 	- 127.0.0.1	rabbitmq.magento.local
 	- 127.0.0.1	adminer.magento.local
@@ -90,29 +86,6 @@ __Currently supported versions of Magento__
 	- Running this command will install Vue Storefront 2 project to nuxt folder and start development server on http://nuxt.magento.local
 		- You can start VSF 2 with ```bin/node yarn dev```
 		- VSF 2 documentation https://docs.vuestorefront.io/v2/
-
-### Configure Nginx and Magento logs to be viewed in Kibana
-
-1) Go to http://kibana.magento.local/app/management/kibana/indexPatterns in your browser
-2) If Magento installation was successful, then there should be "You have data in Elasticsearch. Now, create an index pattern." title on the page and "Create index pattern" button. Click on it.
-
-<img src="https://user-images.githubusercontent.com/24256329/126873547-bc92a3fc-bb65-421d-be27-e538b21bf4f5.png" alt="Create index pattern" width="250px">
-
-3) On the next page, write "weblogs-*" into the text input and click on "Next step" button
-
-<img src="https://user-images.githubusercontent.com/24256329/126873590-0c051030-aa5a-42fa-a49f-ebbb85133d3b.png" alt="weblogs-*" width="250px">
-
-4) Select @timestamp from dropdown and click on "Create index pattern" button
-
-<img src="https://user-images.githubusercontent.com/24256329/126874296-5d9cb6e6-2477-4686-b0b4-a8bb0a8fc795.png" alt="@timestamp" width="250px">
-
-5) All done. You should be able to analyse your logs on http://kibana.magento.local/app/discover (if not, then refresh magento.local in order to log something).
-
-<img src="https://user-images.githubusercontent.com/24256329/126874474-54594eb2-3b41-4e24-ba18-528aef0c1859.png" alt="Analyse logs" width="250px">
-
-Kibana should now be configured to display 5 types of logs: nginx error log (```nginx_error```), magento debug log (```magento_debug```), magento exception log (```magento_exception```), magento system log (```magento_system```) and magento reports (```magento_report```). Each log has its own tag (values in brackets), that can be used to filter search results in Kibana - click on "+ Add filter" on the left side and type in the name of the log you want to search in.
-
-<img src="https://user-images.githubusercontent.com/24256329/126874664-a47f924e-84d7-43bb-9275-154b96618f17.png" alt="Filter by tags" width="250px">
 
 ### Configure Xdebug
 
@@ -184,5 +157,3 @@ Preferences - PHP - Servers
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container
 - You might encounter permission issues if you manually delete one of bind mounted folders, because docker will automatically recreate them with root permissions, which means, that your containers won't have write access to them, because all containers are running in rootless mode.
-- If filebeat container stops with the error below, then remove the container (or run bin/compose/cleanup to remove all containers and images) and run bin/helpers/fix-filebeat-permissions and then bin/compose/up
-  - ```Exiting: error loading config file: config file ("filebeat.yml") can only be writable by the owner but the permissions are "-rw-rw-r--" (to fix the permissions use: 'chmod go-w /usr/share/filebeat/filebeat.yml')```

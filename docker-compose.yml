@@ -38,7 +38,7 @@ services:
       - external
       - internal
     volumes:
-      - $NUXT_DIRECTORY:/home/node/nuxt
+      - $FRONTEND_DIRECTORY:/home/node/nuxt
 
   nginx:
     build:
@@ -53,7 +53,6 @@ services:
       - php-fpm
       - node
       - adminer
-      - kibana
       - rabbitmq
       - redis-admin
       - mailhog
@@ -64,7 +63,7 @@ services:
     volumes:
       - $MAGENTO_DIRECTORY:/home/dockeruser/magento
       - $DOCKER_DIRECTORY/images/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - nginx_logs:/var/log/nginx
+      - $APP_DIRECTORY/logs/nginx:/var/log/nginx
 
   mysql:
     build:
@@ -112,56 +111,6 @@ services:
       - elasticsearch:/usr/share/elasticsearch/data
       - $DOCKER_DIRECTORY/images/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
-  logstash:
-    build:
-      args:
-        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
-      context: $APP_DIRECTORY
-      dockerfile: $DOCKER_DIRECTORY/images/logstash/Dockerfile
-    container_name: docker-magento_logstash
-    depends_on:
-      - elasticsearch
-    environment:
-      LS_JAVA_OPTS: "-Xmx1g -Xms1g"
-    networks:
-      - internal
-    volumes:
-      - $DOCKER_DIRECTORY/images/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - $DOCKER_DIRECTORY/images/logstash/pipeline:/usr/share/logstash/pipeline
-
-  filebeat:
-    build:
-      args:
-        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
-      context: $APP_DIRECTORY
-      dockerfile: $DOCKER_DIRECTORY/images/filebeat/Dockerfile
-    container_name: docker-magento_filebeat
-    depends_on:
-      - logstash
-    networks:
-      - internal
-    volumes:
-      - $DOCKER_DIRECTORY/images/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - nginx_logs:/var/log/nginx
-      - $MAGENTO_DIRECTORY/var/log:/var/log/magento
-      - $MAGENTO_DIRECTORY/var/report:/var/report/magento
-
-  kibana:
-    build:
-      args:
-        DOCKER_IMAGE_FOLDER: $DOCKER_IMAGE_FOLDER
-      context: $APP_DIRECTORY
-      dockerfile: $DOCKER_DIRECTORY/images/kibana/Dockerfile
-    container_name: docker-magento_kibana
-    depends_on:
-      - elasticsearch
-    networks:
-      - external
-      - internal
-    platform: linux/amd64
-    volumes:
-      - $DOCKER_DIRECTORY/images/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
-
   rabbitmq:
     build:
       context: $APP_DIRECTORY
@@ -208,4 +157,3 @@ networks:
 volumes:
   elasticsearch:
   mysql:
-  nginx_logs:

@@ -1,4 +1,4 @@
-FROM elasticsearch:7.12.1
+FROM elasticsearch:7.17.4
 
 ARG DOCKER_IMAGE_FOLDER
 

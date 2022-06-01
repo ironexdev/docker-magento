@@ -29,8 +29,8 @@ then
     echo "Created ${MAGENTO_DIRECTORY}/var/report folder"
 fi
 
-if [ ! -d ${NUXT_DIRECTORY} ]
+if [ ! -d ${FRONTEND_DIRECTORY} ]
 then
-    mkdir ${NUXT_DIRECTORY}
-    echo "Created ${NUXT_DIRECTORY} folder"
+    mkdir ${FRONTEND_DIRECTORY}
+    echo "Created ${FRONTEND_DIRECTORY} folder"
 fi

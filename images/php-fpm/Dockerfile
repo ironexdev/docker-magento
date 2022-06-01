@@ -1,4 +1,4 @@
-FROM php:7.4.19-fpm-alpine
+FROM php:8.1.6-fpm-alpine
 
 ARG DOCKER_IMAGE_FOLDER
 ARG GROUP_ID
@@ -39,7 +39,7 @@ RUN docker-php-ext-install sockets
 
 # Xdebug
 RUN apk add --no-cache $PHPIZE_DEPS \
-    && pecl install xdebug-3.0.4 \
+    && pecl install -Z xdebug-3.1.4 \
     && docker-php-ext-enable xdebug
 
 COPY $DOCKER_IMAGE_FOLDER/php-fpm/php.ini /usr/local/etc/php/php.ini
@@ -47,9 +47,11 @@ COPY $DOCKER_IMAGE_FOLDER/php-fpm/php.ini /usr/local/etc/php/php.ini
 # Git
 RUN apk add git
 
-# Composer
-RUN apk add composer
-
+# Composer - apk add composer installs incorrect version of php
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');" && \
+    mv composer.phar /usr/local/bin/composer;
 RUN addgroup -g $GROUP_ID -S dockeruser
 
 RUN adduser -S -G dockeruser -u $USER_ID -s /bin/ash dockeruser

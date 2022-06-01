@@ -6,11 +6,11 @@ export GROUP_ID=$(id -u)
 export APP_DIRECTORY=$(pwd)
 
 export DOCKER_BIN_DIRECTORY=${APP_DIRECTORY}/bin
-export DOCKER_DIRECTORY=${APP_DIRECTORY}
+export DOCKER_DIRECTORY=${APP_DIRECTORY}/docker
 export DOCKER_IMAGE_FOLDER="images" # used in Dockerfiles as relative path to the context (APP_DIRECTORY)
 
 export MAGENTO_DIRECTORY=${APP_DIRECTORY}/magento
 
-export NUXT_DIRECTORY=${APP_DIRECTORY}/nuxt
+export FRONTEND_DIRECTORY=${APP_DIRECTORY}/frontend
 
 export CLI_XDEBUG_SERVER_NAME=magento.local

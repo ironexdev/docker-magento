@@ -1,3 +1,3 @@
-FROM rabbitmq:3.8.16-management-alpine
+FROM rabbitmq:3.9.19-management-alpine
 
 USER rabbitmq
