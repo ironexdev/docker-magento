@@ -29,7 +29,7 @@ __Currently supported versions of Magento__
 - (Windows) Install Git bash and use it to run project shell commands located in bin folder
 - Add following to etc/hosts
 	- 127.0.0.1	magento.local
-	- 127.0.0.1 nuxt.magento.local
+	- 127.0.0.1 frontend.magento.local
 	- 127.0.0.1	redis.magento.local
 	- 127.0.0.1	rabbitmq.magento.local
 	- 127.0.0.1	adminer.magento.local
@@ -79,13 +79,12 @@ __Currently supported versions of Magento__
 
 2) Run ```bin/compose/up```
 
-### Create new Vue Storefront 2 project with Magento 2 GraphQL integration
+### Create new Nuxt project with Magento 2 GraphQL integration
 
-1) Run ```bin/new-project/vsf```
+1) Run ```bin/new-project/nuxt```
  	- Select Magento 2 integration
-	- Running this command will install Vue Storefront 2 project to nuxt folder and start development server on http://nuxt.magento.local
-		- You can start VSF 2 with ```bin/node yarn dev```
-		- VSF 2 documentation https://docs.vuestorefront.io/v2/
+	- Running this command will install Nuxt project to nuxt folder and start development server on http://frontend.magento.local
+		- You can start Nuxt with ```bin/node yarn dev```
 
 ### Configure Xdebug
 
@@ -153,7 +152,12 @@ Preferences - PHP - Servers
     - Runs specified script (FILE_PATH) and then stops at defined breakpoint (via IDE) 
     - It is relative to magento folder, run ```bin/xdebug/cli pub/index.php``` to debug ```magento/pub/index.php``` 
     - SERVER_NAME is optional
+
 ## Troubleshooting
 
 - If elasticsearch container randomly stops working, then it is probably running out of RAM. Allocate more RAM to Docker Desktop and/or increase Xmx2g value specified in elasticsearch service configuration in docker-compose.yml and restart the container
 - You might encounter permission issues if you manually delete one of bind mounted folders, because docker will automatically recreate them with root permissions, which means, that your containers won't have write access to them, because all containers are running in rootless mode.
+
+## Known Issues
+- App built with yarn dev in Docker keeps reloading
+  - https://github.com/nuxt/vite/issues/172

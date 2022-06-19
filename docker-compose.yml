@@ -30,7 +30,7 @@ services:
         USER_ID: $USER_ID
       context: $APP_DIRECTORY
       dockerfile: $DOCKER_DIRECTORY/images/node/Dockerfile
-    command: sh -c "cd /home/node && chown $USER_ID:$GROUP_ID nuxt && tail -f /dev/null"
+    command: sh -c "cd /home/node && chown $USER_ID:$GROUP_ID frontend && tail -f /dev/null"
     container_name: docker-magento_node
     environment:
       MAGENTO_GRAPHQL: "http://nginx:8080/graphql"
@@ -38,7 +38,7 @@ services:
       - external
       - internal
     volumes:
-      - $FRONTEND_DIRECTORY:/home/node/nuxt
+      - $FRONTEND_DIRECTORY:/home/node/frontend
 
   nginx:
     build:
