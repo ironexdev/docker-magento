@@ -29,7 +29,7 @@ ${DOCKER_BIN_DIRECTORY}/compose/up
 cd ${DOCKER_DIRECTORY}
 
 # Create new project
-docker-compose exec php-fpm sh -c 'composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 /home/dockeruser/temp && rm -rf /home/dockeruser/temp/var/log && rm -rf /home/dockeruser/temp/var/report && cp -r /home/dockeruser/temp/. /home/dockeruser/magento && rm -rf /home/dockeruser/temp'
+docker-compose exec php-fpm sh -c 'composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 /home/dockeruser/temp && rm -rf /home/dockeruser/temp/var/log && rm -rf /home/dockeruser/temp/var/report && cp -r /home/dockeruser/temp/. /home/dockeruser/magento && rm -rf /home/dockeruser/temp'
 
 echo "New Magento project has been created."
 
